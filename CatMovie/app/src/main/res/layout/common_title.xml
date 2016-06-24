@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:minHeight="40dp"
+    android:background="#fcff0000"
+    android:layout_height="60dp">
+
+    <TextView
+        android:paddingLeft="5dp"
+        android:drawableRight="@drawable/ui"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:id="@+id/city"
+        android:text="城市"
+        android:textColor="#ffffff"
+        android:layout_width="85dp"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/common_title_rg"
+            android:gravity="center"
+            android:layout_margin="9dp"
+            android:background="@drawable/btn_red"
+            android:orientation="horizontal"
+            android:layout_width="180dp"
+            android:layout_height="match_parent">
+            <RadioButton
+                android:id="@+id/common_title_rg_hot"
+                style="@style/TitleRadioStyle"
+                android:text="热映" />
+            <RadioButton
+                android:id="@+id/common_title_rg_wait"
+                style="@style/TitleRadioStyle"
+                android:text="待映"/>
+            <RadioButton
+                android:id="@+id/common_title_rg_out"
+                style="@style/TitleRadioStyle"
+                android:text="海外" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/iv_title_selector_bg"
+            android:background="@drawable/shape_bg"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="60dp"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
