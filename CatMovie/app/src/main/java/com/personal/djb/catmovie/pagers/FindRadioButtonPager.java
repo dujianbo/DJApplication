@@ -5,16 +5,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.personal.djb.catmovie.base.MainBasePager;
+import com.personal.djb.catmovie.base.BasePager;
 
 /**
  * Created by Administrator on 2016/6/23 0023.
  */
-public class FindRadioButtonPagerMain extends MainBasePager {
+public class FindRadioButtonPager extends BasePager {
 
     private TextView view;
 
-    public FindRadioButtonPagerMain(Context context) {
+    public FindRadioButtonPager(Context context) {
         super(context);
     }
 

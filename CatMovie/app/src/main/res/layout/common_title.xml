@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:minHeight="40dp"
+    android:minHeight="50dp"
     android:background="#fcff0000"
     android:layout_height="60dp">
 
-    <TextView
+    <Button
+        android:background="@drawable/btn_title_selector"
         android:paddingLeft="5dp"
         android:drawableRight="@drawable/ui"
         android:textSize="18sp"
         android:gravity="center"
-        android:id="@+id/city"
+        android:id="@+id/common_title_city"
         android:text="城市"
         android:textColor="#ffffff"
         android:layout_width="85dp"
         android:layout_height="match_parent" />
 
     <RelativeLayout
+        android:background="@drawable/btn_red"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="45dp">
+
+        <ImageView
+            android:id="@+id/iv_title_selector_bg"
+            android:background="@drawable/shape_bg"
+            android:layout_width="60dp"
+            android:layout_height="match_parent" />
+
         <RadioGroup
             android:id="@+id/common_title_rg"
             android:gravity="center"
-            android:layout_margin="9dp"
-            android:background="@drawable/btn_red"
             android:orientation="horizontal"
             android:layout_width="180dp"
             android:layout_height="match_parent">
@@ -42,18 +49,21 @@
                 android:text="海外" />
         </RadioGroup>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@drawable/btn_title_selector"
+        android:id="@+id/common_title_search"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:layout_width="50dp"
+        android:layout_height="match_parent" >
+
         <ImageView
-            android:id="@+id/iv_title_selector_bg"
-            android:background="@drawable/shape_bg"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_width="60dp"
+            android:background="@drawable/jo"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

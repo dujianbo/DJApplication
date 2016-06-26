@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
-import com.personal.djb.catmovie.MainActivity;
 import com.personal.djb.catmovie.R;
 import com.personal.djb.catmovie.bean.SplashImageBean;
 import com.personal.djb.catmovie.utils.NetUtils;
@@ -150,7 +149,7 @@ public class SplashActivity extends Activity {
             String imageUrl = posters.get(posters.size()-1).getPic();
             Glide.with(this).load(imageUrl).placeholder(R.drawable.splash_image)
                     .diskCacheStrategy(DiskCacheStrategy.ALL).into(mSplashImage);
-            handler.sendEmptyMessageDelayed(1,1000);
+            handler.sendEmptyMessageDelayed(1,500);
         } else {
             startMain();
             finish();

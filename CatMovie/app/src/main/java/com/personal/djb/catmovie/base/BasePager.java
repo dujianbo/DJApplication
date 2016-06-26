@@ -6,7 +6,7 @@ import android.view.View;
 /**
  * Created by Administrator on 2016/6/23 0023.
  */
-public abstract class MainBasePager {
+public abstract class BasePager {
 
     public Context context;
     /**
@@ -14,7 +14,7 @@ public abstract class MainBasePager {
      */
     public View rootView;
 
-    public MainBasePager(Context context) {
+    public BasePager(Context context) {
         this.context = context;
         rootView = initView();
     }

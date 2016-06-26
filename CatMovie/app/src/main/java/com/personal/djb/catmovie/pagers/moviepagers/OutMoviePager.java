@@ -5,12 +5,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.personal.djb.catmovie.base.moviebase.MovieBasePager;
+import com.personal.djb.catmovie.base.BasePager;
 
 /**
  * Created by Administrator on 2016/6/24 0024.
  */
-public class OutMoviePager extends MovieBasePager {
+public class OutMoviePager extends BasePager {
 
     private TextView view;
 
@@ -29,6 +29,7 @@ public class OutMoviePager extends MovieBasePager {
     public void initData() {
         Log.e("TAG", "电影页面的海外initData");
         super.initData();
+        isInitData = true;
 
         view.setText("海外");
     }

@@ -1,17 +1,17 @@
-package com.personal.djb.catmovie;
+package com.personal.djb.catmovie.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.personal.djb.catmovie.base.MainBasePager;
-import com.personal.djb.catmovie.pagers.CinemaRadioButtonPagerMain;
-import com.personal.djb.catmovie.pagers.FindRadioButtonPagerMain;
-import com.personal.djb.catmovie.pagers.MovieRadioButtonPagerMain;
-import com.personal.djb.catmovie.pagers.SettingRadioButtonPagerMain;
+import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.base.BasePager;
+import com.personal.djb.catmovie.pagers.CinemaRadioButtonPager;
+import com.personal.djb.catmovie.pagers.FindRadioButtonPager;
+import com.personal.djb.catmovie.pagers.MovieRadioButtonPager;
+import com.personal.djb.catmovie.pagers.SettingRadioButtonPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +21,15 @@ public class MainActivity extends FragmentActivity {
     private FrameLayout mFrameContent;
     private RadioGroup mRadioGroup;
 
-    private RadioButton mRBMovie;
-    private RadioButton mRBCinema;
-    private RadioButton mRBFind;
-    private RadioButton mRBSetting;
+//    private RadioButton mRBMovie;
+//    private RadioButton mRBCinema;
+//    private RadioButton mRBFind;
+//    private RadioButton mRBSetting;
 
     /**
      * 基础页面集合
      */
-    private List<MainBasePager> datas;
+    private List<BasePager> datas;
 
     /**
      * 记录RadioButton点击的位置
@@ -52,10 +52,10 @@ public class MainActivity extends FragmentActivity {
 
     private void initFragment() {
         datas = new ArrayList<>();
-        datas.add(new MovieRadioButtonPagerMain(this));
-        datas.add(new CinemaRadioButtonPagerMain(this));
-        datas.add(new FindRadioButtonPagerMain(this));
-        datas.add(new SettingRadioButtonPagerMain(this));
+        datas.add(new MovieRadioButtonPager(this));
+        datas.add(new CinemaRadioButtonPager(this));
+        datas.add(new FindRadioButtonPager(this));
+        datas.add(new SettingRadioButtonPager(this));
     }
 
     private void setListener() {
@@ -108,7 +108,7 @@ public class MainActivity extends FragmentActivity {
      * @param position
      */
     private void setPager(int position) {
-        MainBasePager mbp = datas.get(position);
+        BasePager mbp = datas.get(position);
         if (!mbp.isInitData){
             mbp.initData();
         }
