@@ -44,6 +44,8 @@ public class SplashActivity extends Activity {
                     //  检查网络连接
                     if (NetUtils.getInstance().checkNetworkState()) {
                         loadImageFromNet();
+                        handler.removeCallbacksAndMessages(null);
+                        handler.sendEmptyMessageDelayed(3,800);
                     } else {
                         startMain();
                     }
@@ -54,6 +56,9 @@ public class SplashActivity extends Activity {
                     } else {
                         startMain();
                     }
+                    break;
+                case 3 :
+                        startMain();
                     break;
             }
 
@@ -66,15 +71,20 @@ public class SplashActivity extends Activity {
     private void loadImageFromNet() {
         RequestCall call = OkHttpUtils.get().url(mSplashUrl).build();
         call.connTimeOut(1000);
+        call.readTimeOut(500);
+        call.writeTimeOut(500);
         call.execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e("TAG", "splash联网失败");
+                handler.removeCallbacksAndMessages(null);
                 startMain();
             }
 
             @Override
             public void onResponse(String response, int id) {
+                Log.e("TAG", "splash联网成功");
+                handler.removeCallbacksAndMessages(null);
                 processData(response);
             }
         });
@@ -142,12 +152,13 @@ public class SplashActivity extends Activity {
      * @param json
      */
     private void processData(String json) {
+        Log.e("TAG", "json=="+json);
         SplashImageBean sib = new Gson().fromJson(json, SplashImageBean.class);
         List<SplashImageBean.PostersBean> posters = sib.getPosters();
 
         if (posters != null && posters.size() > 0) {
             String imageUrl = posters.get(posters.size()-1).getPic();
-            Glide.with(this).load(imageUrl).placeholder(R.drawable.splash_image)
+            Glide.with(this).load(imageUrl).placeholder(R.drawable.splash_2)
                     .diskCacheStrategy(DiskCacheStrategy.ALL).into(mSplashImage);
             handler.sendEmptyMessageDelayed(1,500);
         } else {

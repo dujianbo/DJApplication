@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.personal.djb.catmovie.activity.SearchActivity">
+
+    <include layout="@layout/common_title"/>
+
+    <TextView
+        android:background="#f5f5f5"
+        android:text="热门搜索"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hot_search_recyclerview"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:background="#f5f5f5"
+        android:text="类型"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+    <RadioGroup
+        android:id="@+id/rg_test"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:text="剧情"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp" />
+        <RadioButton
+            android:text="喜剧"
+            android:id="@+id/type_funny"
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp" />
+        <RadioButton
+            android:text="爱情"
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp" />
+        <RadioButton
+            android:text="动画"
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp" />
+    </RadioGroup>
+    <TextView
+        android:background="#f5f5f5"
+        android:text="地区"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+</LinearLayout>

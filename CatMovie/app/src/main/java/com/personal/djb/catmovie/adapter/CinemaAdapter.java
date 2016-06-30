@@ -13,13 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
-import com.personal.djb.catmovie.bean.movies.HotMovieBean;
+import com.personal.djb.catmovie.bean.cinema.CinemaBean;
 import com.personal.djb.catmovie.bean.movies.HotMovieHeadPagerBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -29,26 +30,30 @@ import java.util.List;
 import okhttp3.Call;
 
 /**
- * Created by Administrator on 2016/6/25 0025.
+ * Created by Administrator on 2016/6/28 0028.
  */
-public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<HotMovieBean.DataBean.MoviesBean> datas;
     private Context context;
+
+    private List<CinemaBean.BaseBean> data;
+
+    public CinemaAdapter(Context context,List<CinemaBean.BaseBean> data) {
+        this.context = context;
+        this.data = data;
+    }
+
+    public void setDatas(List<CinemaBean.BaseBean> data) {
+        this.data.clear();
+        this.data.addAll(data);
+    }
 
     private final String HOTMOVIE_HEADPAGE_URL = "http://advert.mobile.meituan.com/api/v3/adverts?cityid=1&category=11&version=6.8.0&new=0&app=movie&clienttp=android&uuid=FCFAB9D8DD339645D629C8372A29A2C6AD16F9C9E87AF9AC0D656B29DD5AC6DE&devid=866641027400542&uid=&movieid=&partner=1&apptype=1&smId=&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=qq&utm_medium=android&utm_term=6.8.0&utm_content=866641027400542&ci=1&net=255&dModel=HM%20NOTE%201LTETD&lat=40.100855&lng=116.378273&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463730432992&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=01f9c5c0-eb56-4e19-92fb-b86b16ad79da&__skcy=5K8wRR%2FKYAZDTgmAzbhrXi%2FomzU%3D";
 
     //  头部类型
-    public static final int HEAD_TYPE = 0;
-    //  第2行类型
-    public static final int SECOUND_TYPE = 1;
+    private static final int HEAD_TYPE = 0;
     //  默认类型
-    public static final int DEFAULT_TYPE = 2;
-
-    public HotMovieAdapter(Context context,List<HotMovieBean.DataBean.MoviesBean> datas){
-        this.datas = datas;
-        this.context = context;
-    }
+    private static final int DEFAULT_TYPE = 1;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -57,18 +62,11 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             HeadViewHolder headHolder = new HeadViewHolder(LayoutInflater.from(
                     context).inflate(R.layout.item_hot_movie_head, parent, false));
             return headHolder;
-        } else if (viewType == DEFAULT_TYPE){
-            //  默认类型
-            ViewHolder holder = new ViewHolder(LayoutInflater.from(
-                    context).inflate(R.layout.item_hot_movie, parent, false));
-            return holder;
-        } else if (viewType == SECOUND_TYPE){
-            //  第2条的数据
-            SecoundViewHolder secoundViewHolder = new SecoundViewHolder(LayoutInflater.from(
-                    context).inflate(R.layout.item_hot_movie_secound, parent, false));
-            return secoundViewHolder;
         }
-        return null;
+
+        ViewHolder holder = new ViewHolder(LayoutInflater.from(
+                context).inflate(R.layout.cinema_item, parent, false));
+        return holder;
     }
 
     /**
@@ -80,34 +78,29 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof HeadViewHolder) {
-            ((HotMovieAdapter.HeadViewHolder)holder).setData();
+            ((CinemaAdapter.HeadViewHolder)holder).setData();
         } else if (holder instanceof ViewHolder) {
-            if (position == 1) {
-                ((HotMovieAdapter.ViewHolder)holder).setData(datas.get(position - 1));
-                return;
-            }
-            ((HotMovieAdapter.ViewHolder)holder).setData(datas.get(position - 2));
-        } else if (holder instanceof SecoundViewHolder) {
-            ((HotMovieAdapter.SecoundViewHolder)holder).setData();
+            ((CinemaAdapter.ViewHolder)holder).setData(position - 1);
         }
     }
 
     @Override
     public int getItemViewType(int position) {
+//        return super.getItemViewType(position);
         //  分类型的加载view
         if (position == 0) {
             return HEAD_TYPE;
         }
-
-        if (position == 2) {
-            return SECOUND_TYPE;
-        }
         return DEFAULT_TYPE;
     }
 
+    /**
+     * 根据类型返回数目
+     * @return
+     */
     @Override
     public int getItemCount() {
-        return datas.size() + 1;
+        return data.size() + 1;
     }
 
     /**
@@ -118,12 +111,11 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private ViewPager mHotMovieHeadPager;
         private HeadPageAdapter adapter;
         //  热映页面的资源集合
-        private List<HotMovieHeadPagerBean.DataBean> datas;
+        private List<HotMovieHeadPagerBean.DataBean> pageDatas;
 
         public HeadViewHolder(View itemView) {
             super(itemView);
             mHotMovieHeadPager = (ViewPager) itemView.findViewById(R.id.vp_item_hot_movie_head);
-            mHotMovieHeadPager.setVisibility(View.GONE);
         }
 
         public void setData() {
@@ -139,16 +131,16 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     processData(response);
                 }
             });
-
         }
 
         private void processData(String json) {
             HotMovieHeadPagerBean hotMovieHeadPagerBean = new Gson().fromJson(json, HotMovieHeadPagerBean.class);
-            datas = hotMovieHeadPagerBean.getData();
+            pageDatas = hotMovieHeadPagerBean.getData();
 
             mHotMovieHeadPager.setVisibility(View.VISIBLE);
             adapter = new HeadPageAdapter();
             mHotMovieHeadPager.setAdapter(adapter);
+            mHotMovieHeadPager.setCurrentItem(500);
             mHotMovieHeadPager.addOnPageChangeListener(new MyOnPageChangeListener());
 
             //  每3秒轮播图滚动一次
@@ -162,7 +154,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                mHotMovieHeadPager.setCurrentItem((mHotMovieHeadPager.getCurrentItem() + 1) % datas.size());
+                mHotMovieHeadPager.setCurrentItem(mHotMovieHeadPager.getCurrentItem() + 1);
                 handler.removeCallbacksAndMessages(null);
                 handler.sendEmptyMessageDelayed(0,3000);
             }
@@ -172,10 +164,10 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         /**
          * 热映页面头部pager的适配器
          */
-        private class HeadPageAdapter extends PagerAdapter{
+        private class HeadPageAdapter extends PagerAdapter {
             @Override
             public int getCount() {
-                return datas.size();
+                return 1000;
             }
 
             @Override
@@ -193,7 +185,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public Object instantiateItem(ViewGroup container, int position) {
                 ImageView imageView = new ImageView(context);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                Glide.with(context).load(datas.get(position).getImgUrl())
+                Glide.with(context).load(pageDatas.get(position%pageDatas.size()).getImgUrl())
                         .placeholder(R.drawable.lh).error(R.drawable.lh)
                         .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
                 container.addView(imageView);
@@ -219,7 +211,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         case MotionEvent.ACTION_DOWN://按下
                             //移除所有的消息和任务
                             handler.removeCallbacksAndMessages(null);
-                        break;
+                            break;
                         case MotionEvent.ACTION_CANCEL:
                             handler.removeCallbacksAndMessages(null);
                             handler.sendEmptyMessageDelayed(0,3000);
@@ -227,7 +219,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         case MotionEvent.ACTION_UP://离开
                             handler.removeCallbacksAndMessages(null);
                             handler.sendEmptyMessageDelayed(0,3000);
-                        }
+                    }
                     return true;
                 }
             }
@@ -267,53 +259,35 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     /**
-     * 这个holder用来显示第二个列表
-     */
-    public class SecoundViewHolder extends RecyclerView.ViewHolder {
-
-
-        public SecoundViewHolder(View itemView) {
-            super(itemView);
-
-        }
-
-        public void setData() {
-
-        }
-    }
-
-    /**
      * 这个holder用来显示默认的列表
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //  电影图标
-        private ImageView mHotMovieIcon;
-        //  电影名称
-        private TextView mHotMovieName;
-        //  电影评分
-        private TextView mHotMovieScore;
-        //  电影期待人数
-        private TextView mHotMovieWish;
-        //  电影描述
-        private TextView mHotMovieDesc;
-        //  电影场次
-        private TextView mHotMovieCount;
-        //  购票按钮
-        private Button mHotMovieBtnBuy;
-        //  预约按钮
-        private Button mHotMovieBtnOrder;
+        //  影院登录
+        private RelativeLayout mCineaTitle;
+        //  登录按钮
+        private Button mCineaLogin;
+        //  影院名称
+        private TextView mCineaName;
+        //  影院地址
+        private TextView mCineaPlace;
+        //  退，团，改的布局
+        private LinearLayout mLLEatAndTuaGroup;
+        private TextView mTui;
+        private TextView mTuan;
+        private TextView mGai;
+        private TextView mQuan;
+        private TextView mEat;
+        private TextView mZuo;
+        //  影院价格
+        private TextView mCineaPrice;
 
-        //  电影评分布局
-        private LinearLayout mHotMovieScoreLinear;
-        //  电影想看人数布局
-        private LinearLayout mHotMovieWishLinear;
-
-        //  电影上映时间
-        private TextView mHotMovieDate;
-        //  电影屏幕3d 2d等
-        private ImageView mMaxScreen2D;
-        private ImageView mMaxScreen3D;
-        private ImageView mScreen3D;
+        //  显示特惠的布局
+        private RelativeLayout mRLForfoot;
+        private RelativeLayout mRLForfoot1;
+        //  特惠的文字显示
+        private TextView mGood;
+        private TextView mSales;
+        private TextView mCinemaLength;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -326,87 +300,74 @@ public class HotMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
          * @param itemView
          */
         private void findView(View itemView) {
-            mHotMovieIcon = (ImageView) itemView.findViewById(R.id.iv_item_hotmovie_icon);
-            mHotMovieName = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_name);
-            mHotMovieScore = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_score);
-            mHotMovieWish = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_wish);
-            mHotMovieDesc = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_desc);
-            mHotMovieCount = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_count);
+            mCineaName = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_name);
+            mCineaPlace = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_desc);
 
-            mHotMovieBtnBuy = (Button) itemView.findViewById(R.id.btn_item_hotmovie_buy);
-            mHotMovieBtnOrder = (Button) itemView.findViewById(R.id.btn_item_hotmovie_order);
+            mCineaLogin = (Button) itemView.findViewById(R.id.btn_item_login);
+            mLLEatAndTuaGroup = (LinearLayout) itemView.findViewById(R.id.ll_eat_tuan_group);
 
-            mHotMovieScoreLinear = (LinearLayout) itemView.findViewById(R.id.ll_item_hotmovie_score);
-            mHotMovieWishLinear = (LinearLayout) itemView.findViewById(R.id.ll_item_hotmovie_wish);
+            mTui = (TextView) itemView.findViewById(R.id.tui);
+            mTuan = (TextView) itemView.findViewById(R.id.tuan);
+            mGai = (TextView) itemView.findViewById(R.id.gai);
+            mQuan = (TextView) itemView.findViewById(R.id.quanjing);
+            mEat = (TextView) itemView.findViewById(R.id.eat);
+            mZuo = (TextView) itemView.findViewById(R.id.zuo);
 
-            mHotMovieDate = (TextView) itemView.findViewById(R.id.tv_item_hotmovie_date);
+            mRLForfoot = (RelativeLayout) itemView.findViewById(R.id.ll_item_fordingwei);
+            mRLForfoot1 = (RelativeLayout) itemView.findViewById(R.id.ll_item_fordingwei1);
 
-            mMaxScreen2D = (ImageView) itemView.findViewById(R.id.iv_imax2d);
-            mMaxScreen3D = (ImageView) itemView.findViewById(R.id.iv_imax3d);
-            mScreen3D = (ImageView) itemView.findViewById(R.id.iv_3d);
+            mCineaPrice = (TextView) itemView.findViewById(R.id.iv_imax2d);
+
+            mCineaTitle = (RelativeLayout) itemView.findViewById(R.id.tv_item_title_desc);
+
+            mGood = (TextView) itemView.findViewById(R.id.tv_item_desc1);
+            mSales = (TextView) itemView.findViewById(R.id.tv_item_desc2);
+            mCinemaLength = (TextView) itemView.findViewById(R.id.cinema_length);
         }
 
         /**
          * 绑定每个item的数据
-         * @param moviesBean
+         * @param position
          */
-        public void setData(HotMovieBean.DataBean.MoviesBean moviesBean) {
-            //  设置公共的view 图片 标题等
-            Glide.with(context).load(moviesBean.getImg()).placeholder(R.drawable.backgroud_logo02)
-                    .error(R.drawable.backgroud_logo02).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(mHotMovieIcon);
+        public void setData(int position) {
+            CinemaBean.BaseBean baseBean = data.get(position);
 
-            mHotMovieName.setText(moviesBean.getNm());
-            mHotMovieDesc.setText(moviesBean.getScm());
-
-            //  判断类型显示相应的内容
-            mMaxScreen2D.setVisibility(View.GONE);
-            mMaxScreen3D.setVisibility(View.GONE);
-            mScreen3D.setVisibility(View.GONE);
-            //  1.判断3d
-            if (moviesBean.isValue3d()) {
-                if(moviesBean.isImax()) {
-                    mMaxScreen3D.setVisibility(View.VISIBLE);
-                }
-                mScreen3D.setVisibility(View.VISIBLE);
-            } else {
-                if(moviesBean.isImax()) {
-                    mMaxScreen2D.setVisibility(View.VISIBLE);
-                }
+            mCineaTitle.setVisibility(View.GONE);
+            if (getLayoutPosition() == 1) {
+                mCineaTitle.setVisibility(View.VISIBLE);
             }
 
-            //  2.判断是否上映
-            if (moviesBean.getPreSale() == 0) {
-                //  上映过
-                setHasPlayMovie(moviesBean);
+            mCineaName.setText(baseBean.getNm());
+            mCineaPlace.setText(baseBean.getAddr());
+            mCineaPrice.setText(baseBean.getSellPrice() + "");
 
-            } else if (moviesBean.getPreSale() == 1){
-                //  未上映
-                setNoPlayMovie(moviesBean);
+            mLLEatAndTuaGroup.setVisibility(View.VISIBLE);
+
+            int value = (int) (Math.random() * 6);
+            mTui.setVisibility(View.GONE);
+            mTuan.setVisibility(View.GONE);
+            mGai.setVisibility(View.GONE);
+            mQuan.setVisibility(View.GONE);
+            mEat.setVisibility(View.GONE);
+            mCinemaLength.setText((double) (Math.round(baseBean.getLat()*100)/100.0)+"km");
+
+            mRLForfoot1.setVisibility(View.GONE);
+            if (baseBean.getDealPrice() != 0) {
+                mRLForfoot1.setVisibility(View.VISIBLE);
+                mSales.setText(baseBean.getSellPrice()+"元/影票，大促！！");
             }
-        }
-        //  未上映
-        private void setNoPlayMovie(HotMovieBean.DataBean.MoviesBean moviesBean) {
-            mHotMovieWishLinear.setVisibility(View.VISIBLE);
-            mHotMovieScoreLinear.setVisibility(View.GONE);
-            mHotMovieWish.setText(moviesBean.getWish() + "");
-            mHotMovieBtnOrder.setVisibility(View.VISIBLE);
-            mHotMovieBtnBuy.setVisibility(View.GONE);
-            mHotMovieDate.setVisibility(View.VISIBLE);
-            mHotMovieCount.setVisibility(View.GONE);
-            mHotMovieDate.setText(moviesBean.getShowInfo());
-        }
-        //  上映过
-        private void setHasPlayMovie(HotMovieBean.DataBean.MoviesBean moviesBean) {
-            mHotMovieScoreLinear.setVisibility(View.VISIBLE);
-            mHotMovieWishLinear.setVisibility(View.GONE);
-            mHotMovieScore.setText(moviesBean.getSc() + "");
-            mHotMovieBtnBuy.setVisibility(View.VISIBLE);
-            mHotMovieBtnOrder.setVisibility(View.GONE);
-            mHotMovieCount.setVisibility(View.VISIBLE);
-            mHotMovieDate.setVisibility(View.GONE);
-            mHotMovieCount.setText(moviesBean.getShowInfo());
+
+            for(int i = 0; i < Math.random()*5; i++) {
+                mLLEatAndTuaGroup.getChildAt((int) (Math.random() * 5) + 1).setVisibility(View.VISIBLE);
+            }
+
+            mRLForfoot.setVisibility(View.GONE);
+            if (value == 5) {
+                mRLForfoot.setVisibility(View.VISIBLE);
+                mGood.setText(str[(int)(Math.random ()*4)]);
+            }
         }
     }
 
+    private String[] str = {"大海鱼棠等2部电影特惠","赏金猎人特惠","赏金猎人等2部电影特惠","大海鱼棠特惠"};
 }

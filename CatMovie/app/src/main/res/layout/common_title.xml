@@ -2,26 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:minHeight="50dp"
-    android:background="#fcff0000"
-    android:layout_height="60dp">
-
-    <Button
-        android:background="@drawable/btn_title_selector"
-        android:paddingLeft="5dp"
-        android:drawableRight="@drawable/ui"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:id="@+id/common_title_city"
-        android:text="城市"
-        android:textColor="#ffffff"
-        android:layout_width="85dp"
-        android:layout_height="match_parent" />
+    android:background="#dd403b"
+    android:layout_height="50dp">
 
     <RelativeLayout
-        android:background="@drawable/btn_red"
+        android:id="@+id/rl_choice_city"
+        android:layout_width="60dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/common_title_city"
+            android:gravity="center"
+            android:text="城市"
+            android:paddingLeft="8dp"
+            android:visibility="gone"
+            android:background="@drawable/btn_title_selector"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:layout_width="55dp"
+            android:drawableRight="@drawable/ui"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rg_group_group"
+        android:visibility="gone"
+        android:background="@drawable/title_rl_bg_selector"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp">
+        android:layout_width="180dp"
+        android:padding="2dp"
+        android:layout_height="30dp">
 
         <ImageView
             android:id="@+id/iv_title_selector_bg"
@@ -55,15 +67,70 @@
         android:background="@drawable/btn_title_selector"
         android:id="@+id/common_title_search"
         android:layout_alignParentRight="true"
-        android:padding="10dp"
-        android:layout_width="50dp"
+        android:layout_width="40dp"
         android:layout_height="match_parent" >
 
-        <ImageView
-            android:background="@drawable/jo"
+        <ImageButton
+            android:id="@+id/common_title_search_search"
+            android:src="@drawable/jo"
+            android:visibility="gone"
+            android:background="@drawable/btn_title_selector"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/common_title_search_cancel"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:paddingRight="8dp"
+            android:visibility="gone"
+            android:text="取消"
+            android:background="@drawable/btn_title_selector"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/common_title_rl_etandot"
+        android:layout_toLeftOf="@id/common_title_search"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/common_title_et_input"
+            android:paddingLeft="5dp"
+            android:drawablePadding="5dp"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_sousuokuang_press"
+            android:hint="找电影、电影人、电影院"
+            android:background="@drawable/search_bg_selector"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/btn_cinema_choiceplace"
+        android:layout_toLeftOf="@id/common_title_search"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_title_selector"
+        android:src="@drawable/u_"
+        android:layout_width="40dp"
+        android:visibility="gone"
+        android:layout_height="match_parent" />
+
+
+    <TextView
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:id="@+id/tv_title_cinema_name"
+        android:text="影院"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

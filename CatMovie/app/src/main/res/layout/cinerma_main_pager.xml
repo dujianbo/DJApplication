@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/common_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <com.cjj.MaterialRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/refresh"
+            app:wave_color="#20ff2020"
+            app:progress_show_circle_backgroud="true"
+            app:overlay="false"
+            app:wave_show="true"
+            app:progress_backgroud_color="#FFFAFAFA"
+            app:progress_colors="@array/material_colors"
+            app:wave_height_type="normal"
+            app:progress_show_arrow="true"
+            app:isLoadMore="true"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_main_cinema"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </com.cjj.MaterialRefreshLayout>
+        
+        <TextView
+            android:id="@+id/tv_mycurrplace"
+            android:background="@drawable/place_bg_selector"
+            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"
+            android:padding="3dp"
+            android:textSize="16sp"
+            android:text="昌平区北七家镇尚硅谷IT教育"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include layout="@layout/netload_cache_pager"/>
+    </RelativeLayout>
+</LinearLayout>

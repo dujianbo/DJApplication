@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="8dp"
+    android:background="#f5f5f5"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:background="#ffffff"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/tv_item_title_desc"
+            android:paddingLeft="10dp"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:text="登录后可查看收藏影院"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_item_login"
+                android:background="@drawable/btn_hotmovie_buy"
+                android:layout_alignParentRight="true"
+                android:text="登录"
+                android:textColor="#dd403b"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_width="50dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/tv_item_title_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:background="#f5f5f5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <LinearLayout
+                android:id="@+id/tv_item_hotmovie_name_ll"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_hotmovie_name"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:text="影院名字"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/iv_imax2d"
+                    android:layout_marginLeft="5dp"
+                    android:text="33"
+                    android:textColor="#ff0000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/iv_3d"
+                    android:text="元起"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="12dp"
+                android:id="@+id/rl_xxxxxx"
+                android:layout_below="@id/tv_item_hotmovie_name_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_item_hotmovie_desc"
+                    android:singleLine="true"
+                    android:textColor="#c5000000"
+                    android:text="地址"
+                    android:layout_marginRight="8dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/cinema_length"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/cinema_length"
+                    android:text="1.5km"
+                    android:layout_alignTop="@id/tv_item_hotmovie_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/ll_eat_tuan_group"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/tv_item_hotmovie_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/zuo"
+                        android:text="座"
+                        android:textSize="10sp"
+                        android:padding="3dp"
+                        android:layout_marginRight="3dp"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:background="@drawable/bg_tv_cinema"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tuan"
+                        android:text="团"
+                        android:textSize="10sp"
+                        android:padding="3dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:background="@drawable/bg_tv_cinema"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/quanjing"
+                        android:text="杜比全景声厅"
+                        android:textSize="10sp"
+                        android:padding="3dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:background="@drawable/bg_tv_cinema"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tui"
+                        android:text="退"
+                        android:textSize="10sp"
+                        android:padding="3dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/bg_tv_cinema_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/gai"
+                        android:textSize="10sp"
+                        android:text="改签"
+                        android:padding="3dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/bg_tv_cinema_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/eat"
+                        android:text="小吃"
+                        android:textSize="10sp"
+                        android:padding="3dp"
+                        android:layout_marginRight="3dp"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/bg_tv_cinema_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/rl_xxxxxx"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/ll_item_fordingwei"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+                    <ImageView
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/iv_item_small_icon1"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/wn"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+                    <TextView
+                        android:id="@+id/tv_item_desc1"
+                        android:layout_toRightOf="@+id/iv_item_small_icon1"
+                        android:layout_centerVertical="true"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="8dp"
+                        android:text="赏金猎人特惠"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_item_fordingwei1"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:layout_height="20dp">
+
+                    <TextView
+                        android:id="@+id/iv_item_small_icon2"
+                        android:text="促"
+                        android:textSize="12sp"
+                        android:padding="2dp"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:background="@drawable/bg_tv_cinema_red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_item_desc2"
+                        android:layout_toRightOf="@+id/iv_item_small_icon2"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="8dp"
+                        android:text="元"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

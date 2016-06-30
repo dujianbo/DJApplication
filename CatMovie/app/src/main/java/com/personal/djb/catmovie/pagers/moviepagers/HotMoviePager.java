@@ -13,7 +13,7 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
-import com.personal.djb.catmovie.adapter.HotMovieAdapter;
+import com.personal.djb.catmovie.adapter.MovieAdapter;
 import com.personal.djb.catmovie.base.BasePager;
 import com.personal.djb.catmovie.bean.movies.HotMovieBean;
 import com.personal.djb.catmovie.utils.NetUtils;
@@ -30,6 +30,7 @@ import okhttp3.Call;
  */
 public class HotMoviePager extends BasePager {
 
+//    private final String HOT_MOVIE_URL = "http://api.meituan.com/mmdb/movie/v3/list/hot.json?ci=1&limit=12&token=&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=864394100811969&net=255&dModel=VPhone&uuid=34E86498880DD102B3AE536CBD0B91E18FE1C6AF0DF103828C211090ED4196FD&lat=39.906899375649395&lng=116.39723909965588&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1467009899799&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=628150cd-6c6e-40b9-8dee-218d138f24e7&__skcy=tjWgaZc35IaYrtk3AzYwTLnS0gI%3D";
     private final String HOT_MOVIE_URL = "http://m.maoyan.com/movie/list.json?type=hot&offset=0&limit=1000";
 
     private RecyclerView mHotMovieRecyclerView;
@@ -56,7 +57,7 @@ public class HotMoviePager extends BasePager {
     /**
      * 适配器
      */
-    private HotMovieAdapter adapter;
+    private MovieAdapter adapter;
     private boolean isRefreshing = false;
 
     public HotMoviePager(Context context) {
@@ -93,6 +94,7 @@ public class HotMoviePager extends BasePager {
         mNoNetPager.setVisibility(View.GONE);
         mLoadingPager.setVisibility(View.GONE);
 
+
         //  检查网络连接
         if (!NetUtils.getInstance().checkNetworkState()) {
             mNoNetPager.setVisibility(View.VISIBLE);
@@ -100,6 +102,7 @@ public class HotMoviePager extends BasePager {
         }
         isInitData = true;
         mLoadingPager.setVisibility(View.VISIBLE);
+
         getDataFromNet();
     }
 
@@ -176,7 +179,7 @@ public class HotMoviePager extends BasePager {
         mLoadingPager.setVisibility(View.GONE);
         mHotMovieRecyclerView.setVisibility(View.VISIBLE);
 
-        adapter = new HotMovieAdapter(context,datas);
+        adapter = new MovieAdapter(context,datas, MovieAdapter.HOT_MOVIE);
         //设置布局管理器
         RecyclerView.LayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
         mHotMovieRecyclerView.setLayoutManager(manager);

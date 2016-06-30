@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/MaterialRefreshLayout_library" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/sticky_headers_library" />
           </set>
         </option>
       </GradleProjectSettings>

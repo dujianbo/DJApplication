@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabout_movie_pager"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#ffffff"
+        app:tabIndicatorColor="#CE0000"
+        app:tabSelectedTextColor="#ff0000"
+        app:tabTextColor="#99000000"
+        />
+
+    <com.personal.djb.catmovie.view.MyNoScrollViewPager
+        android:id="@+id/out_movie_pager"
+        android:layout_below="@+id/tabout_movie_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.personal.djb.catmovie.view.MyNoScrollViewPager>
+</RelativeLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.personal.djb.catmovie.activity.WebActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:minHeight="50dp"
+        android:background="#dd403b"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/ib_web_forback"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/tk"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_web_title"
+            android:textSize="18sp"
+            android:text=""
+            android:layout_toRightOf="@+id/ib_web_forback"
+            android:layout_centerVertical="true"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </WebView>
+
+        <include layout="@layout/netload_cache_pager"/>
+    </RelativeLayout>
+
+</LinearLayout>

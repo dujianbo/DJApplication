@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/CatMovie.iml" filepath="$PROJECT_DIR$/CatMovie.iml" />
       <module fileurl="file://$PROJECT_DIR$/MaterialRefreshLayout_library/MaterialRefreshLayout_library.iml" filepath="$PROJECT_DIR$/MaterialRefreshLayout_library/MaterialRefreshLayout_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sticky_headers_library/sticky_headers_library.iml" filepath="$PROJECT_DIR$/sticky_headers_library/sticky_headers_library.iml" />
     </modules>
   </component>
 </project>

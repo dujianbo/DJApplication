@@ -2,6 +2,7 @@ package com.personal.djb.catmovie.pagers;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,10 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.SearchActivity;
 import com.personal.djb.catmovie.base.BasePager;
 import com.personal.djb.catmovie.pagers.moviepagers.HotMoviePager;
 import com.personal.djb.catmovie.pagers.moviepagers.OutMoviePager;
 import com.personal.djb.catmovie.pagers.moviepagers.WaitMoviePager;
+import com.personal.djb.catmovie.view.MyMovieButtonViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +34,18 @@ public class MovieRadioButtonPager extends BasePager {
 
     private View view;
 
-    private ViewPager mMoviePager;
+    private MyMovieButtonViewPager mMoviePager;
     private RadioGroup mTitleRadioGroup;
     private ImageView mIVPoint;
     private MyAdapter adapter;
-    //  记录点击位置
-    private int position;
     private List<BasePager> datas;
     private int leftMargin;
     private int width;
     private int height;
 
     private boolean isMeasure = false;
+    private RelativeLayout mRGGroup;
+    private RelativeLayout mRlChoiceCity;
 
     /**
      * 选择城市的按钮
@@ -51,7 +54,11 @@ public class MovieRadioButtonPager extends BasePager {
     /**
      * 搜索的按钮
      */
-    private RelativeLayout mBtnSearch;
+    private RelativeLayout mBtnSearchRl;
+    private ImageView mBtnSearch;
+
+    private int preChecked = 0;
+    private int prePosition = 0;
 
     public MovieRadioButtonPager(Context context) {
         super(context);
@@ -71,10 +78,21 @@ public class MovieRadioButtonPager extends BasePager {
 
         mTitleRadioGroup = (RadioGroup) view.findViewById(R.id.common_title_rg);
         mIVPoint = (ImageView) view.findViewById(R.id.iv_title_selector_bg);
-        mMoviePager = (ViewPager) view.findViewById(R.id.vp_main_movie);
+        mMoviePager = (MyMovieButtonViewPager) view.findViewById(R.id.vp_main_movie);
 
         mBtnChoiceCity = (Button) view.findViewById(R.id.common_title_city);
-        mBtnSearch = (RelativeLayout) view.findViewById(R.id.common_title_search);
+        mBtnSearchRl = (RelativeLayout) view.findViewById(R.id.common_title_search);
+        mBtnSearch = (ImageView) view.findViewById(R.id.common_title_search_search);
+        mRGGroup = (RelativeLayout) view.findViewById(R.id.rg_group_group);
+        mRlChoiceCity = (RelativeLayout) view.findViewById(R.id.rl_choice_city);
+
+        mRlChoiceCity.setVisibility(View.VISIBLE);
+
+        mTitleRadioGroup.setVisibility(View.VISIBLE);
+        mBtnSearch.setVisibility(View.VISIBLE);
+        mBtnChoiceCity.setVisibility(View.VISIBLE);
+        mBtnSearch.setVisibility(View.VISIBLE);
+        mRGGroup.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -85,7 +103,6 @@ public class MovieRadioButtonPager extends BasePager {
 
         //  准备页面
         initPager();
-
 
         adapter = new MyAdapter();
         mMoviePager.setAdapter(adapter);
@@ -117,7 +134,8 @@ public class MovieRadioButtonPager extends BasePager {
         mBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "搜索", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, SearchActivity.class);
+                context.startActivity(intent);
             }
         });
 
@@ -145,6 +163,7 @@ public class MovieRadioButtonPager extends BasePager {
         public Object instantiateItem(ViewGroup container, int position) {
             View rootView = datas.get(position).rootView;
             container.addView(rootView);
+            setPager(position);
             return rootView;
         }
 
@@ -156,27 +175,27 @@ public class MovieRadioButtonPager extends BasePager {
     }
 
     private class MyOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
+
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+            if (group.getCheckedRadioButtonId() == preChecked) {
+                return;
+            }
+            preChecked = checkedId;
             switch (checkedId) {
                 case R.id.common_title_rg_hot :
-                    position = 0;
+                    mMoviePager.setCurrentItem(0);
                     break;
                 case R.id.common_title_rg_wait:
-                    position = 1;
+                    mMoviePager.setCurrentItem(1);
                     break;
                 case R.id.common_title_rg_out:
-                    position = 2;
+                    mMoviePager.setCurrentItem(2);
                     break;
             }
-
-            setPager(position);
-            choicePager(position);
+            Log.e("dj", "调用radioButton改变的监听");
         }
-    }
-
-    private void choicePager(int position) {
-        mMoviePager.setCurrentItem(position);
     }
 
     private void setPager(int position) {
@@ -200,14 +219,6 @@ public class MovieRadioButtonPager extends BasePager {
                 //红点在屏幕上的坐标 = 起始坐标 +  红点移动的距离；
                 float reddistance =leftMargin* (position + positionOffset);
 
-                //  设置字体的透明度
-//                float alpha = (reddistance/leftMargin)*2;
-////                mTitleRadioGroup.getChildAt(position).setAlpha((1- position + positionOffset)*2);
-////                mTitleRadioGroup.getChildAt(prePosition).setAlpha((1 - position + positionOffset)*2);
-//
-//                mTitleRadioGroup.getChildAt(position).setAlpha(alpha);
-//                mTitleRadioGroup.getChildAt(prePosition).setAlpha(alpha);
-
                 RelativeLayout.LayoutParams params  = new RelativeLayout.LayoutParams(width,height);
                 params.leftMargin  = (int) reddistance;
                 mIVPoint.setLayoutParams(params);
@@ -217,13 +228,6 @@ public class MovieRadioButtonPager extends BasePager {
 
         @Override
         public void onPageSelected(int position) {
-//            mTitleRadioGroup.getChildAt(prePosition).setAlpha(1);
-//            mTitleRadioGroup.getChildAt(position).setAlpha(1);
-
-//            Log.e("test", "prePosition" + prePosition + "    position" + position);
-
-            //  可以省略
-//            setPager(position);
             int id = mTitleRadioGroup.getChildAt(position).getId();
 //            Log.e("test", "id===="+id);
             mTitleRadioGroup.check(id);
@@ -235,6 +239,9 @@ public class MovieRadioButtonPager extends BasePager {
         }
     }
 
+    /**
+     * 一个监听，用来测量控件宽高
+     */
     private class MyOnGlobalLayoutListener implements ViewTreeObserver.OnGlobalLayoutListener {
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         @Override
@@ -242,13 +249,12 @@ public class MovieRadioButtonPager extends BasePager {
             //取出注册
             mIVPoint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-            width = mTitleRadioGroup.getChildAt(0).getWidth();
-            height = mTitleRadioGroup.getHeight();
+            width = mIVPoint.getWidth();
+            height = mIVPoint.getHeight();
 
             Log.e("test", "width==="+width + "  ,height==="+height+"  ,leftMargin==="+leftMargin);
             //间距 = 每个控件的宽
             leftMargin = mTitleRadioGroup.getChildAt(1).getLeft() - mTitleRadioGroup.getChildAt(0).getLeft();;
-//            System.out.println("leftMargin==" + leftMargin);
             isMeasure = true;
         }
     }

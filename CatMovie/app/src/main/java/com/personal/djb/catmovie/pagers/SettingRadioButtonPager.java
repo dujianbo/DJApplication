@@ -3,8 +3,8 @@ package com.personal.djb.catmovie.pagers;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
+import com.personal.djb.catmovie.R;
 import com.personal.djb.catmovie.base.BasePager;
 
 /**
@@ -12,7 +12,7 @@ import com.personal.djb.catmovie.base.BasePager;
  */
 public class SettingRadioButtonPager extends BasePager {
 
-    private TextView view;
+    private View view;
 
     public SettingRadioButtonPager(Context context) {
         super(context);
@@ -21,16 +21,16 @@ public class SettingRadioButtonPager extends BasePager {
     @Override
     public View initView() {
         Log.e("TAG", "radiobutton我的设置页面initView");
-        view = new TextView(context);
+        view = View.inflate(context, R.layout.mysetting_page,null);
         return view;
     }
 
     @Override
     public void initData() {
         Log.e("TAG", "radiobutton我的设置页面initData");
-
         isInitData = true;
-        view.setText("我的");
         super.initData();
+
+
     }
 }
