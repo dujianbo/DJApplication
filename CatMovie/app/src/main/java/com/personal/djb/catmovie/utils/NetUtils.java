@@ -5,6 +5,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import com.personal.djb.catmovie.bean.movies.HotMovieBean;
+
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/6/23 0023.
  */
@@ -80,4 +84,13 @@ public class NetUtils {
     private void loadAdmob(){
     }
 
+    private List<HotMovieBean.DataBean.MoviesBean> hotMovies;
+
+    public List<HotMovieBean.DataBean.MoviesBean> getHotMovies(){
+        return hotMovies;
+    }
+
+    public void setHotMovies(List<HotMovieBean.DataBean.MoviesBean> hotMovies){
+        this.hotMovies = hotMovies;
+    }
 }

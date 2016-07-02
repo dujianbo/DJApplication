@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -444,15 +443,21 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
                     switch (currType) {
                         case HOT_MOVIE :
 //                            Toast.makeText(context, "被点击", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, WebActivity.class);
-                            intent.putExtra("url","http://m.maoyan.com/movie/246188?_v_=yes");
+                            int idHot = hotMovieDatas.get(getLayoutPosition() - 1).getId();
+                            String urlHot = "http://m.maoyan.com/movie/" + idHot + "?_v_=yes";
+                                    intent.putExtra("url",urlHot);
                             context.startActivity(intent);
                             break;
                         case WAIT_MOVIE:
-                            Toast.makeText(context, "待映item被点击", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, "很可惜，没有数据..", Toast.LENGTH_SHORT).show();
+                            int idWait = waitMovieDatas.get(getLayoutPosition() - 1).getId();
+                            String urlWait = "http://m.maoyan.com/movie/" + idWait + "?_v_=yes";
+                            intent.putExtra("url",urlWait);
+                            context.startActivity(intent);
                             break;
                     }
                 }

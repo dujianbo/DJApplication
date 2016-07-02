@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="70dp"
+    android:padding="8dp"
+    android:layout_height="50dp">
+
+    <TextView
+        android:id="@+id/tv_type_most"
+        android:gravity="center"
+        android:text="喜剧"
+        android:enabled="false"
+        android:padding="5dp"
+        android:textColor="@drawable/type_text_color_selector"
+        android:background="@drawable/most_bg_selector"
+        android:textSize="14sp"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

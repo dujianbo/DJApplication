@@ -15,7 +15,7 @@
         <ImageButton
             android:id="@+id/ib_web_forback"
             android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
+            android:background="@drawable/btn_title_selector"
             android:src="@drawable/tk"
             android:layout_width="50dp"
             android:layout_height="match_parent" />

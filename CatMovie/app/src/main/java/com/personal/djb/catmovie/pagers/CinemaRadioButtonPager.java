@@ -24,6 +24,7 @@ import com.personal.djb.catmovie.activity.SearchActivity;
 import com.personal.djb.catmovie.adapter.CinemaAdapter;
 import com.personal.djb.catmovie.base.BasePager;
 import com.personal.djb.catmovie.bean.cinema.CinemaBean;
+import com.personal.djb.catmovie.bean.cinema.PlaceBean;
 import com.personal.djb.catmovie.utils.NetUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -40,6 +41,8 @@ import okhttp3.Call;
 public class CinemaRadioButtonPager extends BasePager {
 
     private String CINEMA_URL = "http://m.maoyan.com/cinemas.json";
+
+    private String PLACE_NET_URL = "http://api.meituan.com/group/v1/city/latlng/40.100168,116.379677?tag=0&__vhost=api.mobile.meituan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6901&utm_source=xiaomi&utm_medium=android&utm_term=6.9.0&utm_content=867515025248252&ci=1&net=255&dModel=Redmi%20Note%202&uuid=6EB9FAAFA10A6C010EBB1A7B00F74A501A378CDE3EBF6261A49B9727ECF79B4D&lat=40.100168&lng=116.379677&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1466660891503&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=62d6ceed-3363-4657-b44c-360020ba3fa6&__skcy=hdKur%2FrsWbF0B085kZFa%2FLMiSrU%3D";
 
     private View view;
 
@@ -144,6 +147,36 @@ public class CinemaRadioButtonPager extends BasePager {
 
 
         getDataFromNet();
+
+        getMyPlaceFromNet();
+    }
+
+    /**
+     * 联网获取自己当前位置
+     */
+    private void getMyPlaceFromNet() {
+        RequestCall call = OkHttpUtils.get().url(PLACE_NET_URL).build();
+        call.connTimeOut(10000);
+        call.execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                processPlaceData(response);
+            }
+        });
+    }
+
+    /**
+     * 联网动态获取地址
+     * @param json
+     */
+    private void processPlaceData(String json) {
+        PlaceBean placeBean = new Gson().fromJson(json, PlaceBean.class);
+        String detail = placeBean.getData().getDetail();
+        mCurPlace.setText(detail);
     }
 
     /**
@@ -183,8 +216,9 @@ public class CinemaRadioButtonPager extends BasePager {
      * @param json
      */
     private void processData(String json) {
+        Log.e("du", json);
+
         CinemaBean cinemaBean = new Gson().fromJson(json, CinemaBean.class);
-        Log.e("ceshi", cinemaBean.toString());
 
         data = new ArrayList<>();
         data.addAll(cinemaBean.getData().getChangping());
@@ -287,6 +321,14 @@ public class CinemaRadioButtonPager extends BasePager {
                 return false;
             }
 
+        });
+
+        mCurPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("TAG1111", "选择地址条被点击");
+                getMyPlaceFromNet();
+            }
         });
     }
 

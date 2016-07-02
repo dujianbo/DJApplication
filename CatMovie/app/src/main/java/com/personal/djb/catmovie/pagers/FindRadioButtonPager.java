@@ -16,11 +16,10 @@ import com.personal.djb.catmovie.adapter.FindAdapter;
 import com.personal.djb.catmovie.base.BasePager;
 import com.personal.djb.catmovie.bean.findbean.FindBean;
 import com.personal.djb.catmovie.utils.NetUtils;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
-
-import java.util.List;
 
 import okhttp3.Call;
 
@@ -32,11 +31,14 @@ public class FindRadioButtonPager extends BasePager {
     //    private final String HOT_MOVIE_URL = "http://api.meituan.com/mmdb/movie/v3/list/hot.json?ci=1&limit=12&token=&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=864394100811969&net=255&dModel=VPhone&uuid=34E86498880DD102B3AE536CBD0B91E18FE1C6AF0DF103828C211090ED4196FD&lat=39.906899375649395&lng=116.39723909965588&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1467009899799&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=628150cd-6c6e-40b9-8dee-218d138f24e7&__skcy=tjWgaZc35IaYrtk3AzYwTLnS0gI%3D";
     private final String FIND_URL = "http://api.meituan.com/sns/v2/feed.json?offset=0&limit=10&timestamp=0&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieC110189035496448D-1&movieBundleVersion=6801&utm_source=baidumobile1&utm_medium=android&utm_term=6.8.0&utm_content=863777020121611&ci=1&net=255";
 
+    private final String FIND_URL_PRE = "http://api.meituan.com/sns/v2/feed.json?offset=10&limit=10&timestamp=1467265117771&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieC110189035496448D-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=864394100811969&ci=55&net=255&dModel=VPhone&uuid=34E86498880DD102B3AE536CBD0B91E18FE1C6AF0DF103828C211090ED4196FD&lat=39.906899375649395&lng=116.39723909965588&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1467282243019&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=85726a51-79d9-418b-8c70-d9c6af6b25a6&__skcy=Nr5J9OY%2BryPO2q1pgLr60zSR4YY%3D";
+
     private RecyclerView mHotMovieRecyclerView;
+    private int count = 0;
     /**
      * 热映电影的集合
      */
-    private List<FindBean.DataBean.FeedsBean> datas;
+    private FindBean.DataBean datas;
     /**
      * 没网的页面
      */
@@ -58,6 +60,7 @@ public class FindRadioButtonPager extends BasePager {
      */
     private FindAdapter adapter;
     private boolean isRefreshing = false;
+    private StickyRecyclerHeadersDecoration headersDecor;
 
     public FindRadioButtonPager(Context context) {
         super(context);
@@ -162,7 +165,7 @@ public class FindRadioButtonPager extends BasePager {
      */
     private void processData(String json) {
         FindBean findBean = new Gson().fromJson(json, FindBean.class);
-        datas = findBean.getData().getFeeds();
+        datas = findBean.getData();
 
         setView();
     }
@@ -189,6 +192,18 @@ public class FindRadioButtonPager extends BasePager {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
         mHotMovieRecyclerView.setLayoutManager(manager);
         //设置adapter
+        headersDecor = new StickyRecyclerHeadersDecoration(adapter); //绑定之前的adapter
+
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                headersDecor.invalidateHeaders();
+            }
+        });  //刷新数据的时候回刷新头部
+
+        mHotMovieRecyclerView.addItemDecoration(headersDecor);
+        headersDecor.invalidateHeaders();
+
         mHotMovieRecyclerView.setAdapter(adapter);
     }
 
@@ -199,6 +214,7 @@ public class FindRadioButtonPager extends BasePager {
         public void onfinish() {
             super.onfinish();
             isRefreshing = false;
+            count = 0;
             Toast.makeText(context, "刷新完成", Toast.LENGTH_SHORT).show();
         }
 
@@ -209,10 +225,9 @@ public class FindRadioButtonPager extends BasePager {
             materialRefreshLayout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mRefreshLayout.finishRefreshLoadMore();
-                    Toast.makeText(context, "加载完成", Toast.LENGTH_SHORT).show();
+                    getMoreDataFromNet();
                 }
-            }, 3000);
+            }, 1200);
         }
 
         @Override
@@ -220,5 +235,40 @@ public class FindRadioButtonPager extends BasePager {
             isRefreshing = true;
             getDataFromNet();
         }
+    }
+
+    /**
+     * 加载更多数据
+     */
+    private void getMoreDataFromNet() {
+        if (count > 2) {
+            mRefreshLayout.finishRefreshLoadMore();
+            Toast.makeText(context, "没有更多数据了，很遗憾", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        OkHttpUtils.get().url(FIND_URL_PRE).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Toast.makeText(context, "加载失败，很抱歉！", Toast.LENGTH_SHORT).show();
+                mRefreshLayout.finishRefreshLoadMore();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                parseMoreData(response);
+            }
+        });
+    }
+
+    /**
+     * 加载更多以后处理数据
+     * @param json
+     */
+    private void parseMoreData(String json) {
+        count++;
+        FindBean findBean = new Gson().fromJson(json, FindBean.class);
+        FindBean.DataBean dataMore = findBean.getData();
+        adapter.setMoreDatas(dataMore);
+        mRefreshLayout.finishRefreshLoadMore();
     }
 }

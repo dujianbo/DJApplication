@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:padding="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginBottom="5dp"
-    android:layout_gravity="center"
-    android:background="@drawable/bg_selector_search"
-    android:layout_height="30dp">
+    android:padding="8dp"
+    android:layout_height="50dp">
 
     <TextView
         android:gravity="center"
         android:text="魔兽"
+        android:padding="5dp"
+        android:textColor="#e70000"
+        android:background="@drawable/bg_selector_search"
+        android:textSize="14sp"
         android:layout_centerInParent="true"
         android:id="@+id/tv_hot_search"
         android:layout_width="wrap_content"

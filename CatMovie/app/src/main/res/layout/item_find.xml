@@ -11,60 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <LinearLayout
-            android:id="@+id/find_head_ll_group"
-            android:visibility="gone"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="90dp">
-            <Button
-                android:id="@+id/huati"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:drawableTop="@drawable/v_"
-                android:paddingTop="12dp"
-                android:background="@drawable/btn_click_selector"
-                android:textSize="12sp"
-                android:text="话题"
-                android:layout_height="match_parent" />
-            <Button
-                android:id="@+id/zixun"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:drawableTop="@drawable/zixun"
-                android:paddingTop="12dp"
-                android:background="@drawable/btn_click_selector"
-                android:textSize="12sp"
-                android:text="资讯"
-                android:layout_height="match_parent" />
-            <Button
-                android:id="@+id/yingku"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:drawableTop="@drawable/v02_"
-                android:paddingTop="12dp"
-                android:background="@drawable/btn_click_selector"
-                android:textSize="12sp"
-                android:text="影库"
-                android:layout_height="match_parent" />
-            <Button
-                android:id="@+id/piaofang"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:drawableTop="@drawable/tf"
-                android:paddingTop="12dp"
-                android:background="@drawable/btn_click_selector"
-                android:textSize="12sp"
-                android:text="票房"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
         <TextView
             android:id="@+id/tv_find_title_date"
-            android:layout_below="@id/find_head_ll_group"
             android:paddingLeft="8dp"
             android:gravity="center_vertical"
             android:text="今天"
+            android:textSize="14sp"
             android:textColor="#000000"
             android:background="#f5f5f5"
             android:layout_width="match_parent"
@@ -181,6 +133,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="3dp"
                     android:textColor="#000000"
+                    android:textSize="14sp"
                     android:layout_toRightOf="@+id/iv_find_yugao_image_rl"
                     android:text="黑寡妇真漂亮"
                     android:layout_width="wrap_content"
@@ -241,6 +194,7 @@
 
             <TextView
                 android:id="@+id/tv_yingping"
+                android:textSize="14sp"
                 android:layout_toRightOf="@id/icccccccccc"
                 android:layout_alignTop="@id/icccccccccc"
                 android:text="钟汉良电影"
@@ -267,6 +221,7 @@
         <TextView
             android:id="@+id/tv_find_username"
             android:text="用户名"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             android:layout_marginLeft="8dp"
             android:padding="2dp"
@@ -297,6 +252,7 @@
             <TextView
                 android:id="@+id/tv_find_zan"
                 android:text="21"
+                android:textSize="14sp"
                 android:layout_marginLeft="3dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -310,6 +266,7 @@
             <TextView
                 android:id="@+id/tv_find_pinlun"
                 android:text="21"
+                android:textSize="14sp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="3dp"
                 android:layout_width="wrap_content"

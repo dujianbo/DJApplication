@@ -31,4 +31,5 @@ dependencies {
     compile project(':MaterialRefreshLayout_library')
     compile 'com.android.support:design:23.1.1'
     compile project(':sticky_headers_library')
+    compile files('libs/pinyin4j-2.5.0.jar')
 }

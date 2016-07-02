@@ -1,6 +1,7 @@
 package com.personal.djb.catmovie.adapter.outmovieadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.WebActivity;
 import com.personal.djb.catmovie.bean.movies.outmoviebean.AmericaMovieBean;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
@@ -212,6 +214,18 @@ public class AmericaMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             mHotMovieCheckAll = (TextView) itemView.findViewById(R.id.tv_item_movie_checkall);
             mHotMovieCheckAllRl = (RelativeLayout) itemView.findViewById(R.id.tv_item_movie_checkall_rl);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int idHot = datas.get(getLayoutPosition() - 1).getId();
+                    String urlHot = "http://m.maoyan.com/movie/" + idHot + "?_v_=yes";
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("url", urlHot);
+                    context.startActivity(intent);
+                }
+            });
         }
 
         /**

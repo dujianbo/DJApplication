@@ -94,7 +94,6 @@ public class HotMoviePager extends BasePager {
         mNoNetPager.setVisibility(View.GONE);
         mLoadingPager.setVisibility(View.GONE);
 
-
         //  检查网络连接
         if (!NetUtils.getInstance().checkNetworkState()) {
             mNoNetPager.setVisibility(View.VISIBLE);
@@ -104,6 +103,7 @@ public class HotMoviePager extends BasePager {
         mLoadingPager.setVisibility(View.VISIBLE);
 
         getDataFromNet();
+
     }
 
     /**
@@ -167,6 +167,7 @@ public class HotMoviePager extends BasePager {
         HotMovieBean hotMovieBean = new Gson().fromJson(json, HotMovieBean.class);
         datas = hotMovieBean.getData().getMovies();
 
+        NetUtils.getInstance().setHotMovies(datas);
         setView();
     }
 
@@ -205,9 +206,9 @@ public class HotMoviePager extends BasePager {
                 @Override
                 public void run() {
                     mRefreshLayout.finishRefreshLoadMore();
-                    Toast.makeText(context, "加载完成", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "抱歉，没有更多数据..", Toast.LENGTH_SHORT).show();
                 }
-            }, 3000);
+            }, 2000);
         }
 
         @Override

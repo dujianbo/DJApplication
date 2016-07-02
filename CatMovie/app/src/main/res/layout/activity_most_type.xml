@@ -32,4 +32,64 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+
+    <com.cjj.MaterialRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refresh"
+        app:wave_color="#20ff2020"
+        app:progress_show_circle_backgroud="true"
+        app:overlay="false"
+        app:wave_show="true"
+        app:progress_backgroud_color="#FFFAFAFA"
+        app:progress_colors="@array/material_colors"
+        app:wave_height_type="normal"
+        app:progress_show_arrow="true"
+        app:isLoadMore="false"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/type_rec"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:background="#e8e8e8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/place_rec"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:background="#e8e8e8"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recy_funny"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <include layout="@layout/netload_cache_pager"/>
+        </RelativeLayout>
+
+    </com.cjj.MaterialRefreshLayout>
 </LinearLayout>

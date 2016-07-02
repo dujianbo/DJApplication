@@ -6,6 +6,7 @@
     <RelativeLayout
         android:id="@+id/netload_nonet"
         android:visibility="gone"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,6 +20,7 @@
             android:layout_below="@+id/iv_netload_nonet"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:textSize="14sp"
             android:text="网络正在开小差~点击重新加载"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -26,6 +28,7 @@
 
     <RelativeLayout
         android:id="@+id/netload_load"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -47,6 +50,7 @@
             android:layout_marginTop="20dp"
             android:layout_below="@+id/ivvvvvvvvvvvvv"
             android:layout_centerHorizontal="true"
+            android:textSize="14sp"
             android:text="拼命加载中..."
             android:paddingLeft="15dp"
             android:layout_width="wrap_content"

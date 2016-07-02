@@ -60,6 +60,7 @@
         <TextView
             android:id="@+id/tv_waitmovie_head_bottom_date"
             android:text="8月5日"
+            android:textSize="14sp"
             android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -76,6 +77,7 @@
         <TextView
             android:id="@+id/tv_waitmovie_head_bottom_name"
             android:text="盜墓笔记"
+            android:textSize="14sp"
             android:layout_above="@+id/tv_waitmovie_head_bottom_want"
             android:textColor="#000000"
             android:layout_marginBottom="3dp"
@@ -84,7 +86,7 @@
 
         <TextView
             android:id="@+id/tv_waitmovie_head_bottom_want"
-            android:text="843832人想看"
+            android:text="85692人想看"
             android:singleLine="true"
             android:textSize="12sp"
             android:layout_alignParentBottom="true"

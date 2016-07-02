@@ -48,7 +48,8 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.data.addAll(data);
     }
 
-    private final String HOTMOVIE_HEADPAGE_URL = "http://advert.mobile.meituan.com/api/v3/adverts?cityid=1&category=11&version=6.8.0&new=0&app=movie&clienttp=android&uuid=FCFAB9D8DD339645D629C8372A29A2C6AD16F9C9E87AF9AC0D656B29DD5AC6DE&devid=866641027400542&uid=&movieid=&partner=1&apptype=1&smId=&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=qq&utm_medium=android&utm_term=6.8.0&utm_content=866641027400542&ci=1&net=255&dModel=HM%20NOTE%201LTETD&lat=40.100855&lng=116.378273&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463730432992&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=01f9c5c0-eb56-4e19-92fb-b86b16ad79da&__skcy=5K8wRR%2FKYAZDTgmAzbhrXi%2FomzU%3D";
+//    private final String HOTMOVIE_HEADPAGE_URL = "http://advert.mobile.meituan.com/api/v3/adverts?cityid=1&category=11&version=6.8.0&new=0&app=movie&clienttp=android&uuid=FCFAB9D8DD339645D629C8372A29A2C6AD16F9C9E87AF9AC0D656B29DD5AC6DE&devid=866641027400542&uid=&movieid=&partner=1&apptype=1&smId=&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=qq&utm_medium=android&utm_term=6.8.0&utm_content=866641027400542&ci=1&net=255&dModel=HM%20NOTE%201LTETD&lat=40.100855&lng=116.378273&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463730432992&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=01f9c5c0-eb56-4e19-92fb-b86b16ad79da&__skcy=5K8wRR%2FKYAZDTgmAzbhrXi%2FomzU%3D";
+    private final String URL_CINEMA_HEADER = "http://advert.mobile.meituan.com/api/v3/adverts?cityid=1&category=12&version=6.8.0&new=0&app=movie&clienttp=android&uuid=2C2C0ECD557F366849954BEF88D0017AE8F745F113619A0301F4E4E123A4CD7E&devid=000000000000000&uid=&movieid=&partner=1&apptype=1&smId=&utm_campaign=AmovieBpushC110189035496448D-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=000000000000000&ci=1&net=255&dModel=Google%20Nexus%204%20-%204.3%20-%20API%2018%20-%20768x1280_1&lat=0.0&lng=0.0&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1466950481658&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=376da951-e975-440d-82b9-f4ac14788679&__skcy=a51B0teaxlLzzW5QEnyfCrcq2S0%3D";
 
     //  头部类型
     private static final int HEAD_TYPE = 0;
@@ -120,7 +121,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void setData() {
             //  联网获取数据
-            OkHttpUtils.get().url(HOTMOVIE_HEADPAGE_URL).build().execute(new StringCallback() {
+            OkHttpUtils.get().url(URL_CINEMA_HEADER).build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
                     mHotMovieHeadPager.setVisibility(View.GONE);

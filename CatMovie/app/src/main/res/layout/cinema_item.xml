@@ -22,6 +22,7 @@
 
             <TextView
                 android:layout_centerVertical="true"
+                android:textSize="14sp"
                 android:text="登录后可查看收藏影院"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -31,7 +32,8 @@
                 android:background="@drawable/btn_hotmovie_buy"
                 android:layout_alignParentRight="true"
                 android:text="登录"
-                android:textColor="#dd403b"
+                android:textSize="14sp"
+                android:textColor="@drawable/btn_text_selertor1"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
                 android:layout_width="50dp"
@@ -71,6 +73,7 @@
                     android:id="@+id/iv_imax2d"
                     android:layout_marginLeft="5dp"
                     android:text="33"
+                    android:textSize="14sp"
                     android:textColor="#ff0000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -97,6 +100,7 @@
                     android:singleLine="true"
                     android:textColor="#c5000000"
                     android:text="地址"
+                    android:textSize="14sp"
                     android:layout_marginRight="8dp"
                     android:layout_alignParentLeft="true"
                     android:layout_toLeftOf="@+id/cinema_length"
@@ -106,6 +110,7 @@
                 <TextView
                     android:id="@+id/cinema_length"
                     android:text="1.5km"
+                    android:textSize="14sp"
                     android:layout_alignTop="@id/tv_item_hotmovie_desc"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"

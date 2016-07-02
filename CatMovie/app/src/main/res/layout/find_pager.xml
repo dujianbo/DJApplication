@@ -38,7 +38,7 @@
 
         </android.support.v7.widget.RecyclerView>
 
+        <include layout="@layout/netload_cache_pager"/>
     </com.cjj.MaterialRefreshLayout>
 
-    <include layout="@layout/netload_cache_pager"/>
 </RelativeLayout>

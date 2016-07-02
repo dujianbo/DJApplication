@@ -1,75 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     android:orientation="vertical"
     tools:context="com.personal.djb.catmovie.activity.SearchActivity">
 
     <include layout="@layout/common_title"/>
 
-    <TextView
-        android:background="#f5f5f5"
-        android:text="热门搜索"
-        android:paddingLeft="8dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/hot_search_recyclerview"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp">
 
-    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:background="#f5f5f5"
-        android:text="类型"
-        android:paddingLeft="8dp"
-        android:gravity="center_vertical"
+        <TextView
+            android:background="#f5f5f5"
+            android:text="热门搜索"
+            android:textSize="14sp"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hot_search_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:layout_height="50dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:background="#f5f5f5"
+            android:text="类型"
+            android:textSize="14sp"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/type_search_recyclerview"
+            android:layout_width="wrap_content"
+            android:background="#ffffff"
+            android:layout_height="200dp">
+
+        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:background="#f5f5f5"
+            android:text="地区"
+            android:textSize="14sp"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/place_search_recyclerview"
+            android:layout_width="wrap_content"
+            android:background="#ffffff"
+            android:layout_height="150dp">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_marginTop="50dp"
+        android:background="#ffffff"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
-    <RadioGroup
-        android:id="@+id/rg_test"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:gravity="center"
-            android:button="@android:color/transparent"
-            android:text="剧情"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="30dp" />
-        <RadioButton
-            android:text="喜剧"
-            android:id="@+id/type_funny"
-            android:gravity="center"
-            android:button="@android:color/transparent"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="30dp" />
-        <RadioButton
-            android:text="爱情"
-            android:gravity="center"
-            android:button="@android:color/transparent"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="30dp" />
-        <RadioButton
-            android:text="动画"
-            android:gravity="center"
-            android:button="@android:color/transparent"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="30dp" />
-    </RadioGroup>
-    <TextView
-        android:background="#f5f5f5"
-        android:text="地区"
-        android:paddingLeft="8dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-</LinearLayout>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/ll_history"
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <TextView
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:background="#f5f5f5"
+                    android:gravity="center_vertical"
+                    android:text="历史搜索记录"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:text="没有历史搜索记录"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/history_recyclerview"
+                        android:background="#ffffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_below="@+id/ll_history"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:paddingLeft="8dp"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:background="#f5f5f5"
+                    android:text="根据您提供的关键字匹配结果如下"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/serch_recy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_nofind"
+                android:layout_below="@+id/ll_history"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:text="很抱歉，没有找到匹配项..."
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

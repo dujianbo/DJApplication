@@ -249,6 +249,10 @@ public class CinemaBean {
 
         public static class Yan extends CinemaBean.BaseBean{}
 
+        public static class HuiMin extends CinemaBean.BaseBean{}
+
+        public static class SaiHan extends CinemaBean.BaseBean{}
+
         @Override
         public String toString() {
             return "DataBean{" +

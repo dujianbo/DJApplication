@@ -138,4 +138,11 @@ public class CacheUtils {
         return "";
 
     }
+
+    /**
+     * 转换字符串格式
+     */
+    public static String change(String string) {
+        return string.replace("w.h","165.220");
+    }
 }

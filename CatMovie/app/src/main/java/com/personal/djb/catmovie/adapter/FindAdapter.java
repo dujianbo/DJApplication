@@ -20,21 +20,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.CelluloideActivity;
 import com.personal.djb.catmovie.activity.WebActivity;
 import com.personal.djb.catmovie.bean.findbean.FindBean;
 import com.personal.djb.catmovie.bean.findbean.FindViewPagerBean;
 import com.personal.djb.catmovie.bean.movies.WaitMovieBean;
 import com.personal.djb.catmovie.utils.DensityUtil;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -42,10 +46,23 @@ import okhttp3.Call;
 /**
  * Created by Administrator on 2016/6/25 0025.
  */
-public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements StickyRecyclerHeadersAdapter{
+
+    private String FALSE_DATA1 = "http://m.maoyan.com/newGuide/HYHTyushou?f=android&userid=-1&pushToken=3074f04c84e26a4e7c91f738d9c6bc32951a70fa77b550175da73b29c61ffe5e103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
+
+    private String FALSE_DATA2 = "http://m.maoyan.com/newGuide/SJLRgoupiaoBSGS?f=android&userid=-1&pushToken=3074f04c84e26a4e7c91f738d9c6bc32951a70fa77b550175da73b29c61ffe5e103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
+
+    private String FALSE_DATA3 = "http://m.maoyan.com/information/12481?_v_=yes&f=android&userid=-1&pushToken=ed475f9d82484a53606d593c0f6b1933124d08c02254c24977bbacdaf8a52300103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=55";
+
+    private String FALSE_DATA4 = "http://m.maoyan.com/newGuide/MYPD0325?f=android&userid=-1&pushToken=3074f04c84e26a4e7c91f738d9c6bc32951a70fa77b550175da73b29c61ffe5e103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
+
+    private String[] falseDatas = {FALSE_DATA1,FALSE_DATA2,FALSE_DATA3,FALSE_DATA4};
 
     //  数据列表
     private List<FindBean.DataBean.FeedsBean> datas;
+    private FindBean.DataBean dataBean1;
+    private FindBean.DataBean dataBean2;
+    private int dataCount;
     //  待映电影的列表
     private List<WaitMovieBean.DataBean.ComingBean> waitMovieDatas;
     private Context context;
@@ -68,9 +85,11 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private String BOOKING_OFFICE_URL = "http://m.maoyan.com/newGuide/maoyanpiaofang?f=nohdft";
 
 
-    public FindAdapter(Context context, List<FindBean.DataBean.FeedsBean> datas){
+    public FindAdapter(Context context, FindBean.DataBean datas){
         this.context = context;
-        this.datas = datas;
+        this.dataBean1 = datas;
+        this.datas = dataBean1.getFeeds();
+        dataCount = this.datas.size();
     }
 
     @Override
@@ -119,9 +138,16 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return datas.size() + 1;
     }
 
-    public void setDatas(List<FindBean.DataBean.FeedsBean> datas) {
+    public void setDatas(FindBean.DataBean datas) {
         this.datas.clear();
-        this.datas.addAll(datas);
+        this.datas.addAll(datas.getFeeds());
+        dataCount = this.datas.size();
+    }
+
+    public void setMoreDatas(FindBean.DataBean datas) {
+        dataBean2 = datas;
+        this.datas.addAll(dataBean2.getFeeds());
+        notifyDataSetChanged();
     }
 
     /**
@@ -138,11 +164,25 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private boolean flag = false;
         private int preSize;
 
+        //  话题 资讯 影库 票房
+        private Button mBtnHT;
+        private Button mBtnZX;
+        private Button mBtnYK;
+        private Button mBtnPF;
+        private LinearLayout mBtnGroup;
+        private MyOnClickListener listener;
+
         public HeadViewHolder(View itemView) {
             super(itemView);
             mHotMovieHeadPager = (ViewPager) itemView.findViewById(R.id.vp_item_hot_movie_head);
             mCurrTitle = (TextView) itemView.findViewById(R.id.tv_currtitle);
             mLLPointGroup = (LinearLayout) itemView.findViewById(R.id.ll_point_group);
+
+            mBtnHT = (Button) itemView.findViewById(R.id.huati);
+            mBtnZX = (Button) itemView.findViewById(R.id.zixun);
+            mBtnYK = (Button) itemView.findViewById(R.id.yingku);
+            mBtnPF = (Button) itemView.findViewById(R.id.piaofang);
+            mBtnGroup = (LinearLayout) itemView.findViewById(R.id.find_head_ll_group);
         }
 
         public void setData() {
@@ -173,6 +213,20 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mHotMovieHeadPager.setCurrentItem(500);
             mHotMovieHeadPager.addOnPageChangeListener(new MyOnPageChangeListener());
 
+            mCurrTitle.setText(pageDatas.get(0).getCommonTitle());
+
+
+            listener = new MyOnClickListener();
+//            //  头部点击事件
+//            mBtnGroup.setVisibility(View.GONE);
+//            if(position == 0) {
+                mBtnGroup.setVisibility(View.VISIBLE);
+                mBtnHT.setOnClickListener(listener);
+                mBtnZX.setOnClickListener(listener);
+                mBtnYK.setOnClickListener(listener);
+                mBtnPF.setOnClickListener(listener);
+//            }
+
             //  每3秒轮播图滚动一次
             handler.sendEmptyMessageDelayed(0, 3000);
 
@@ -190,6 +244,36 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             }
 
+        }
+
+        /**
+         * 点击事件处理
+         */
+        private class MyOnClickListener implements View.OnClickListener {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebActivity.class);
+                switch (v.getId()) {
+                    case R.id.huati :
+                        intent.putExtra("url",TOPIC_URL);
+                        intent.putExtra("webname","话题");
+                        context.startActivity(intent);
+                        break;
+                    case R.id.zixun :
+                        intent.putExtra("url",INFORMATION_URL);
+                        intent.putExtra("webname","资讯");
+                        context.startActivity(intent);
+                        break;
+                    case R.id.yingku :
+                        context.startActivity(new Intent(context, CelluloideActivity.class));
+                        break;
+                    case R.id.piaofang :
+                        intent.putExtra("url",BOOKING_OFFICE_URL);
+                        intent.putExtra("webname","票房");
+                        context.startActivity(intent);
+                        break;
+                }
+            }
         }
 
         /**
@@ -363,14 +447,6 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private LinearLayout llBottom;
         private LinearLayout ll3images;
 
-        //  话题 资讯 影库 票房
-        private Button mBtnHT;
-        private Button mBtnZX;
-        private Button mBtnYK;
-        private Button mBtnPF;
-        private LinearLayout mBtnGroup;
-        private MyOnClickListener listener;
-
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -416,17 +492,14 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tvFindZan = (TextView)itemView.findViewById(R.id.tv_find_zan);
             tvFindPinlun = (TextView)itemView.findViewById(R.id.tv_find_pinlun);
             llBottom = (LinearLayout) itemView.findViewById(R.id.lllllllll);
-            mBtnHT = (Button) itemView.findViewById(R.id.huati);
-            mBtnZX = (Button) itemView.findViewById(R.id.zixun);
-            mBtnYK = (Button) itemView.findViewById(R.id.yingku);
-            mBtnPF = (Button) itemView.findViewById(R.id.piaofang);
-            mBtnGroup = (LinearLayout) itemView.findViewById(R.id.find_head_ll_group);
-            listener = new MyOnClickListener();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "被点击", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "被点击", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, WebActivity.class);
+                    intent.putExtra("url",falseDatas[(int)(Math.random()*4)]);
+                    context.startActivity(intent);
                 }
             });
 
@@ -449,16 +522,6 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             tvFindUsername.setText(feedsBean.getUser().getNickName());
 
-            //  头部点击事件
-            mBtnGroup.setVisibility(View.GONE);
-            if(position == 0) {
-                mBtnGroup.setVisibility(View.VISIBLE);
-                mBtnHT.setOnClickListener(listener);
-                mBtnZX.setOnClickListener(listener);
-                mBtnYK.setOnClickListener(listener);
-                mBtnPF.setOnClickListener(listener);
-            }
-
             Glide.with(context).load(feedsBean.getUser().getAvatarurl()).asBitmap().centerCrop().into(new BitmapImageViewTarget(ivFindBottomIcon) {
                 @Override
                 protected void setResource(Bitmap resource) {
@@ -469,10 +532,15 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
 
-            if(position == 0) {
-                tvFindTitleDate.setVisibility(View.VISIBLE);
-                tvFindTitleDate.setText("今天");
-            }
+//            if(position == 0) {
+//                tvFindTitleDate.setVisibility(View.VISIBLE);
+//                tvFindTitleDate.setText("今天");
+//            }
+//
+//            if (position == dataCount) {
+//                tvFindTitleDate.setVisibility(View.VISIBLE);
+//                tvFindTitleDate.setText("昨天");
+//            }
 
             int count = (int)(Math.random()*50)+1;
             int count1 = (int)(Math.random()*50)+1;
@@ -526,34 +594,70 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
 
-        /**
-         * 点击事件处理
-         */
-        private class MyOnClickListener implements View.OnClickListener {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
-                switch (v.getId()) {
-                    case R.id.huati :
-                        intent.putExtra("url",TOPIC_URL);
-                        intent.putExtra("webname","话题");
-                        context.startActivity(intent);
-                        break;
-                    case R.id.zixun :
-                        intent.putExtra("url",INFORMATION_URL);
-                        intent.putExtra("webname","资讯");
-                        context.startActivity(intent);
-                        break;
-                    case R.id.yingku :
+    }
 
-                        break;
-                    case R.id.piaofang :
-                        intent.putExtra("url",BOOKING_OFFICE_URL);
-                        intent.putExtra("webname","票房");
-                        context.startActivity(intent);
-                        break;
-                }
-            }
+    /**
+     * 以下代码实现recyclerView粘性头部控件
+     */
+    private class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View view) {
+            super(view);
+            commonTitle = (TextView) view;
+        }
+    }
+
+    private TextView commonTitle;
+
+    @Override
+    public long getHeaderId(int position) {
+        if (position == 0) {
+            return -1;
+        }
+
+        if (position <= dataCount) {
+            return 2;
+        }
+
+        if (position > dataCount) {
+            return 3;
+        }
+        return -1;
+    }
+
+    private int parseDate(String strDate) {
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日 E");
+        SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMdd");
+        Date date = null;//提取格式中的日期
+        try {
+            date = sdf1.parse(strDate);
+            String strDate1 = sdf3.format(date);
+            int intDate = Integer.parseInt(strDate1);
+            testDate = sdf2.format(date);
+            return intDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private String testDate;
+
+    @Override
+    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_for_test, parent, false);
+        return new HeaderViewHolder(view);
+    }
+
+    @Override
+    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (getHeaderId(position) == 2) {
+            commonTitle.setText("今天");
+        } else if (getHeaderId(position) == -1) {
+            commonTitle.setVisibility(View.GONE);
+        } else if (getHeaderId(position) == 3) {
+            commonTitle.setText("昨天");
         }
     }
 
