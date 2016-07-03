@@ -108,6 +108,11 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
     private TextView tvYkNumber4;
     private ImageView ivYkSecondicon4;
 
+    private ImageView ivDr1;
+    private ImageView ivDr2;
+    private ImageView ivDr3;
+    private ImageView ivDr4;
+
     /**
      * Find the Views in the layout<br />
      * <br />
@@ -143,6 +148,12 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         tvYkNumber4 = (TextView)findViewById( R.id.tv_yk_number4 );
         ivYkSecondicon4 = (ImageView)findViewById( R.id.iv_yk_secondicon4 );
 
+
+        ivDr1 = (ImageView) findViewById(R.id.iv_yk_dr1);
+        ivDr2 = (ImageView) findViewById(R.id.iv_yk_dr2);
+        ivDr3 = (ImageView) findViewById(R.id.iv_yk_dr3);
+        ivDr4 = (ImageView) findViewById(R.id.iv_yk_dr4);
+
         mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.refresh);
         mRefreshLayout.setSunStyle(true);
 
@@ -168,7 +179,16 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         rlKoubei.setOnClickListener(this);
         rlPiaofang.setOnClickListener(this);
         rlQidai.setOnClickListener(this);
+        tvYkNumber1.setOnClickListener(this);
+        tvYkNumber2.setOnClickListener(this);
+        tvYkNumber3.setOnClickListener(this);
+        tvYkNumber4.setOnClickListener(this);
+        ivYkSecondicon1.setOnClickListener(this);
+        ivYkSecondicon2.setOnClickListener(this);
+        ivYkSecondicon3.setOnClickListener(this);
+        ivYkSecondicon4.setOnClickListener(this);
         mRefreshLayout.setMaterialRefreshListener(new MyMaterialRefreshListener());
+
     }
 
     /**
@@ -239,6 +259,12 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         Glide.with(this).load(change).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
                 .into(ivYkSecondicon4);
+
+        String chang1 = CacheUtils.change(mTop100.getMovies().get(1).getImg());
+        Log.e("TAG33", chang1);
+        Glide.with(this).load(chang1).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
+                .into(ivDr4);
     }
 
     /**
@@ -281,6 +307,11 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         Glide.with(this).load(change).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
                 .into(ivYkSecondicon3);
+
+        String chang1 = CacheUtils.change(mBox.getMovies().get(1).getImg());
+        Glide.with(this).load(chang1).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
+                .into(ivDr3);
     }
 
     /**
@@ -323,6 +354,11 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         Glide.with(this).load(change).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
                 .into(ivYkSecondicon2);
+
+        String chang1 = CacheUtils.change(mWish.getMovies().get(1).getImg());
+        Glide.with(this).load(chang1).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
+                .into(ivDr2);
     }
 
     /**
@@ -365,6 +401,11 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         Glide.with(this).load(change).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
                 .into(ivYkSecondicon1);
+
+        String chang1 = CacheUtils.change(mPraise.getMovies().get(1).getImg());
+        Glide.with(this).load(chang1).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2)
+                .into(ivDr1);
     }
 
     /**
@@ -379,28 +420,28 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
             finish();
         } else if (v == ivYkTopIcon) {
             Toast.makeText(CelluloideActivity.this, "小图标被点击", Toast.LENGTH_SHORT).show();
-        } else if (v == rlKoubei) {
+        } else if (v == rlKoubei || v == tvYkNumber1 || v == ivYkSecondicon1) {
             Intent intent = new Intent(this, BillboardActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("data",mPraise);
             intent.putExtras(bundle);
             startActivity(intent);
             Toast.makeText(CelluloideActivity.this, "口碑被点击", Toast.LENGTH_SHORT).show();
-        } else if (v == rlQidai) {
+        } else if (v == rlQidai || v == tvYkNumber2 || v == ivYkSecondicon2) {
             Toast.makeText(CelluloideActivity.this, "期待被点击", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, BillboardActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("data",mWish);
             intent.putExtras(bundle);
             startActivity(intent);
-        } else if (v == rlPiaofang) {
+        } else if (v == rlPiaofang || v == tvYkNumber3 || v == ivYkSecondicon3) {
             Toast.makeText(CelluloideActivity.this, "票房被点击", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, BillboardActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("data",mBox);
             intent.putExtras(bundle);
             startActivity(intent);
-        } else if (v == rlTop100) {
+        } else if (v == rlTop100 || v == tvYkNumber4 || v == ivYkSecondicon4) {
             Toast.makeText(CelluloideActivity.this, "Top100被点击", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, BillboardActivity.class);
             Bundle bundle = new Bundle();

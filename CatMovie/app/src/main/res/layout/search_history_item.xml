@@ -6,7 +6,7 @@
 
     <ImageView
         android:layout_marginLeft="18dp"
-        android:background="@drawable/vn"
+        android:background="@drawable/vn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     

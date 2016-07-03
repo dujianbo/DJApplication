@@ -103,7 +103,6 @@ public class HotMoviePager extends BasePager {
         mLoadingPager.setVisibility(View.VISIBLE);
 
         getDataFromNet();
-
     }
 
     /**

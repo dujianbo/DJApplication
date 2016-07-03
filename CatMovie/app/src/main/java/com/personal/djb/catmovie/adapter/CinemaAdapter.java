@@ -37,10 +37,12 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
 
     private List<CinemaBean.BaseBean> data;
+    private boolean isSearch;
 
-    public CinemaAdapter(Context context,List<CinemaBean.BaseBean> data) {
+    public CinemaAdapter(Context context,List<CinemaBean.BaseBean> data,boolean isSearch) {
         this.context = context;
         this.data = data;
+        this.isSearch = isSearch;
     }
 
     public void setDatas(List<CinemaBean.BaseBean> data) {
@@ -120,6 +122,11 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         public void setData() {
+            if(isSearch) {
+                mHotMovieHeadPager.setVisibility(View.GONE);
+                return;
+            }
+
             //  联网获取数据
             OkHttpUtils.get().url(URL_CINEMA_HEADER).build().execute(new StringCallback() {
                 @Override
@@ -324,6 +331,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mGood = (TextView) itemView.findViewById(R.id.tv_item_desc1);
             mSales = (TextView) itemView.findViewById(R.id.tv_item_desc2);
             mCinemaLength = (TextView) itemView.findViewById(R.id.cinema_length);
+
         }
 
         /**
@@ -350,7 +358,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mGai.setVisibility(View.GONE);
             mQuan.setVisibility(View.GONE);
             mEat.setVisibility(View.GONE);
-            mCinemaLength.setText((double) (Math.round(baseBean.getLat()*100)/100.0)+"km");
+            mCinemaLength.setText((Math.round(baseBean.getDjbDistance()*100)/100000.0)+"km");
 
             mRLForfoot1.setVisibility(View.GONE);
             if (baseBean.getDealPrice() != 0) {

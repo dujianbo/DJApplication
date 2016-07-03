@@ -102,8 +102,8 @@ public class WaitMoviePager extends BasePager {
         }
         isInitData = true;
         mLoadingPager.setVisibility(View.VISIBLE);
-        getDataFromNet();
 
+        getDataFromNet();
     }
 
     /**

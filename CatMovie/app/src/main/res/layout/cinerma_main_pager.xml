@@ -1,57 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/common_title" />
-
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
+        <include layout="@layout/common_title" />
 
-        <com.cjj.MaterialRefreshLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/refresh"
-            app:wave_color="#20ff2020"
-            app:progress_show_circle_backgroud="true"
-            app:overlay="false"
-            app:wave_show="true"
-            app:progress_backgroud_color="#FFFAFAFA"
-            app:progress_colors="@array/material_colors"
-            app:wave_height_type="normal"
-            app:progress_show_arrow="true"
-            app:isLoadMore="true"
-            >
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_main_cinema"
+            <com.cjj.MaterialRefreshLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/refresh"
+                app:wave_color="#20ff2020"
+                app:progress_show_circle_backgroud="true"
+                app:overlay="false"
+                app:wave_show="true"
+                app:progress_backgroud_color="#FFFAFAFA"
+                app:progress_colors="@array/material_colors"
+                app:wave_height_type="normal"
+                app:progress_show_arrow="true"
+                app:isLoadMore="true"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_main_cinema"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </com.cjj.MaterialRefreshLayout>
+
+            <TextView
+                android:id="@+id/tv_mycurrplace"
+                android:drawableLeft="@drawable/t5"
+                android:drawableRight="@drawable/t6"
+                android:background="@drawable/place_bg_selector"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:layout_alignParentBottom="true"
+                android:padding="3dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:text="北京市昌平区北七家镇尚硅谷IT教育"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--使背景变灰-->
+            <View
+                android:id="@+id/main_darkview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dark_bg"
+                android:visibility="gone" />
+
+            <include layout="@layout/netload_cache_pager"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_search_cinema"
+        android:visibility="gone"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:minHeight="50dp"
+            android:background="#dd403b"
+            android:layout_height="50dp">
+
+            <Button
+                android:id="@+id/cinema_my_search_cancel"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:textColor="#ffffff"
+                android:text="取消"
+                android:background="@drawable/btn_title_selector"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+
+
+            <RelativeLayout
+                android:id="@+id/common_title_rl_etandot"
+                android:layout_toLeftOf="@id/cinema_my_search_cancel"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
                 android:layout_height="match_parent">
 
-            </android.support.v7.widget.RecyclerView>
+                <EditText
+                    android:id="@+id/cinema_et_input"
+                    android:paddingLeft="5dp"
+                    android:drawablePadding="5dp"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/ic_sousuokuang_press"
+                    android:hint="找影院"
+                    android:background="@drawable/search_bg_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        </com.cjj.MaterialRefreshLayout>
-        
+                <ImageView
+                    android:id="@+id/ivDeleteText_cinema"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_search_clear"
+                    android:layout_centerInParent="true"
+                    android:paddingRight="8dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
         <TextView
-            android:id="@+id/tv_mycurrplace"
-            android:drawableLeft="@drawable/t5"
-            android:drawableRight="@drawable/t6"
-            android:background="@drawable/place_bg_selector"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:layout_alignParentBottom="true"
-            android:padding="3dp"
-            android:gravity="center_vertical"
-            android:textSize="14sp"
-            android:text="北京市昌平区北七家镇尚硅谷IT教育"
+            android:id="@+id/searchnofound"
+            android:visibility="gone"
+            android:text="很抱歉，未找到任何信息"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#797979"
+            android:layout_height="50dp" />
 
-        <include layout="@layout/netload_cache_pager"/>
-    </RelativeLayout>
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_city_recy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -309,6 +309,18 @@ public class CinemaBean {
         public boolean sell;
         public int id;
 
+
+        //  我自定义的属性
+        public double djbDistance;
+
+        public double getDjbDistance() {
+            return djbDistance;
+        }
+
+        public void setDjbDistance(double djbDistance) {
+            this.djbDistance = djbDistance;
+        }
+
         public int getBrdId() {
             return brdId;
         }

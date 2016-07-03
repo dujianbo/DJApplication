@@ -180,6 +180,7 @@
                         <RelativeLayout
                             android:id="@+id/rl_koubei"
                             android:clickable="true"
+                            android:background="#f1f1f1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -205,10 +206,20 @@
                                 android:layout_toLeftOf="@+id/iv_yk_secondicon1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
+
+                            <ImageView
+                                android:id="@+id/iv_yk_dr1"
+                                android:layout_marginRight="8dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/splash_2"
+                                android:layout_width="40dp"
+                                android:scaleType="fitXY"
+                                android:layout_height="50dp" />
                             
                             <ImageView
                                 android:id="@+id/iv_yk_secondicon1"
-                                android:layout_marginRight="8dp"
+                                android:layout_marginRight="12dp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/splash_2"
@@ -225,6 +236,7 @@
                         android:layout_height="match_parent">
                         <RelativeLayout
                             android:id="@+id/rl_qidai"
+                            android:background="#f1f1f1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -252,8 +264,19 @@
                                 android:layout_height="wrap_content" />
 
                             <ImageView
-                                android:id="@+id/iv_yk_secondicon2"
+                                android:id="@+id/iv_yk_dr2"
                                 android:layout_marginRight="8dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/splash_2"
+                                android:layout_width="40dp"
+                                android:scaleType="fitXY"
+                                android:layout_height="50dp" />
+
+
+                            <ImageView
+                                android:id="@+id/iv_yk_secondicon2"
+                                android:layout_marginRight="12dp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/splash_2"
@@ -279,6 +302,7 @@
 
                         <RelativeLayout
                             android:id="@+id/rl_piaofang"
+                            android:background="#f1f1f1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -306,13 +330,25 @@
                                 android:layout_height="wrap_content" />
 
                             <ImageView
-                                android:id="@+id/iv_yk_secondicon3"
+                                android:id="@+id/iv_yk_dr3"
+                                android:scaleType="fitXY"
                                 android:layout_marginRight="8dp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/splash_2"
                                 android:layout_width="40dp"
+                                android:layout_height="50dp" />
+
+                            <ImageView
+                                android:id="@+id/iv_yk_secondicon3"
+                                android:layout_marginRight="12dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/splash_2"
+                                android:layout_width="40dp"
                                 android:layout_height="60dp" />
+
+
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -324,6 +360,7 @@
                         android:layout_height="match_parent">
                         <RelativeLayout
                             android:id="@+id/rl_top100"
+                            android:background="#f1f1f1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -351,8 +388,18 @@
                                 android:layout_height="wrap_content" />
 
                             <ImageView
-                                android:id="@+id/iv_yk_secondicon4"
+                                android:id="@+id/iv_yk_dr4"
                                 android:layout_marginRight="8dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/splash_2"
+                                android:layout_width="40dp"
+                                android:scaleType="fitXY"
+                                android:layout_height="50dp" />
+
+                            <ImageView
+                                android:id="@+id/iv_yk_secondicon4"
+                                android:layout_marginRight="12dp"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/splash_2"

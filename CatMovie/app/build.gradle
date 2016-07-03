@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -32,4 +38,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile project(':sticky_headers_library')
     compile files('libs/pinyin4j-2.5.0.jar')
+    compile files('libs/BaiduLBS_Android.jar')
 }

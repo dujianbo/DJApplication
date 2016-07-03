@@ -28,6 +28,8 @@ public class CatMovieApplication extends Application {
         OkHttpUtils.initClient(okHttpClient);
 
         NetUtils.initInstance(this);
+
     }
+
 }
 

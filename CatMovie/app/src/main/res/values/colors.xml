@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="dark_bg">#8000</color>
+
+    <color name="popup_left_bg">#ffffff</color>
+    <color name="popup_right_bg">#f1f1f1</color>
+    <color name="popup_right_bg_selected">#f1f1f1</color>
+
+    <color name="div_gray">#f1f1f1</color>
 </resources>

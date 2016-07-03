@@ -14,10 +14,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.MainActivity;
 import com.personal.djb.catmovie.activity.SearchActivity;
+import com.personal.djb.catmovie.activity.citypackage.CityActivity;
 import com.personal.djb.catmovie.base.BasePager;
 import com.personal.djb.catmovie.pagers.moviepagers.HotMoviePager;
 import com.personal.djb.catmovie.pagers.moviepagers.OutMoviePager;
@@ -58,7 +59,8 @@ public class MovieRadioButtonPager extends BasePager {
     private ImageView mBtnSearch;
 
     private int preChecked = 0;
-    private int prePosition = 0;
+//    private int prePosition = 0;
+    private int REQUEST_CODE = 101;
 
     public MovieRadioButtonPager(Context context) {
         super(context);
@@ -114,6 +116,7 @@ public class MovieRadioButtonPager extends BasePager {
      * 顶部导航栏的监听 等
      */
     private void setListener() {
+
         mTitleRadioGroup.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
         //  设定默认选中
         mTitleRadioGroup.check(R.id.common_title_rg_hot);
@@ -127,7 +130,9 @@ public class MovieRadioButtonPager extends BasePager {
         mBtnChoiceCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "选择城市", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "选择城市", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context,CityActivity.class);
+                ((MainActivity) context).startActivityForResult(intent,REQUEST_CODE);
             }
         });
 
@@ -139,6 +144,16 @@ public class MovieRadioButtonPager extends BasePager {
             }
         });
 
+
+        ((MainActivity)context).setOnAtivityResult(new MainActivity.OnAtivityResult() {
+            @Override
+            public void onResult(int requestCode, int resultCode, Intent data) {
+                if (requestCode == REQUEST_CODE && resultCode == CityActivity.RECUALT_CITY_CODE) {
+                    String cityname = data.getStringExtra("cityname");
+                    mBtnChoiceCity.setText(cityname);
+                }
+            }
+        });
     }
 
     private void initPager() {
@@ -146,6 +161,10 @@ public class MovieRadioButtonPager extends BasePager {
         datas.add(new HotMoviePager(context));
         datas.add(new WaitMoviePager(context));
         datas.add(new OutMoviePager(context));
+    }
+
+    public void setCityName(String currentCity) {
+        mBtnChoiceCity.setText(currentCity);
     }
 
     private class MyAdapter extends PagerAdapter {
