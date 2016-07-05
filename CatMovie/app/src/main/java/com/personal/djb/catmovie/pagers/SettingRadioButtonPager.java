@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.MyShopCartActivity;
 import com.personal.djb.catmovie.activity.MyShopingActivity;
 import com.personal.djb.catmovie.base.BasePager;
 
@@ -139,6 +140,8 @@ public class SettingRadioButtonPager extends BasePager {
 
         myShoping.setOnClickListener( listener );
         myShopingRight.setOnClickListener( listener );
+        myHuiycard.setOnClickListener(listener);
+        myHuiycardRight.setOnClickListener(listener);
     }
 
     private class MyClickListener implements View.OnClickListener {
@@ -146,6 +149,9 @@ public class SettingRadioButtonPager extends BasePager {
         public void onClick(View v) {
             if (v == myShoping || v == myShopingRight) {
                 context.startActivity(new Intent(context, MyShopingActivity.class));
+            } else if (v == myHuiycard || v == myHuiycardRight) {
+                Log.e("TAG", "跳转购物车");
+                context.startActivity(new Intent(context, MyShopCartActivity.class));
             }
         }
     }

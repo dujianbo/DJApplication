@@ -52,6 +52,7 @@ public class ThirdClassAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
+        holder.nameTV.setEnabled(false);
         holder.nameTV.setText(list.get(position).getName());
 
         return convertView;

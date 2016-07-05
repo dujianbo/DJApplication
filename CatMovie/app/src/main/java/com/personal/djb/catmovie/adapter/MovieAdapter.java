@@ -609,10 +609,10 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (getLayoutPosition()==1) {
                 mHotMovieSmallNews1.setVisibility(View.VISIBLE);
                 mHotMovieSmallNews2.setVisibility(View.VISIBLE);
-                mHotMovieSmallNewsIcon1.setText("影评");
-                mHotMovieSmallNewsIcon2.setText("影评");
-                mHotMovieSmallNewsDesc1.setText("节奏和悬念设计超出前作一大截");
-                mHotMovieSmallNewsDesc2.setText("魔术如魔幻，主角近乎超级英雄");
+                mHotMovieSmallNewsIcon1.setText("专题");
+                mHotMovieSmallNewsIcon2.setText("话题");
+                mHotMovieSmallNewsDesc1.setText("这部爆米花电影有的是彩蛋");
+                mHotMovieSmallNewsDesc2.setText("画的不好但我爱这四只龟");
 
             }
 

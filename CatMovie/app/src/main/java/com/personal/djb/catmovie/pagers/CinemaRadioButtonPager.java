@@ -511,6 +511,9 @@ public class CinemaRadioButtonPager extends BasePager {
             public void onClick(View v) {
 //                Intent intent = new Intent(context, SearchActivity.class);
 //                context.startActivity(intent);
+                if(data == null || data.size() < 1) {
+                    return;
+                }
                 Toast.makeText(context, "搜索", Toast.LENGTH_SHORT).show();
                 mRlForSearch.setVisibility(View.VISIBLE);
                 isSearch = true;
@@ -520,6 +523,9 @@ public class CinemaRadioButtonPager extends BasePager {
         mBtnChoicePlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(data == null || data.size() < 1) {
+                    return;
+                }
                 Toast.makeText(context, "选择行政区等", Toast.LENGTH_SHORT).show();
                 showPuPWindow();
             }
@@ -843,7 +849,6 @@ public class CinemaRadioButtonPager extends BasePager {
         String text = "一级：" + firstS + ",二级：" + secondS + ",三级：" + thirdS;
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
 
-//        mainTab1TV.setText(selectedName);
     }
 
 }

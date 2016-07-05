@@ -39,4 +39,5 @@ dependencies {
     compile project(':sticky_headers_library')
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/alipaySdk-20160516.jar')
 }

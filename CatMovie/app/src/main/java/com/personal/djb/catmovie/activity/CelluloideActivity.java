@@ -1,10 +1,16 @@
 package com.personal.djb.catmovie.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,6 +24,7 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.bean.EarthBean;
 import com.personal.djb.catmovie.bean.findbean.YKTopBean;
 import com.personal.djb.catmovie.bean.findbean.yingku.BoxBean;
 import com.personal.djb.catmovie.bean.findbean.yingku.PraiseBean;
@@ -46,6 +53,9 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
     private TextView tvYkTopPerson;
     private ImageView ivYkTopIcon;
     private ImageView topBgIv;
+
+    private String[] earthNames1 = {"上海电影节","戛纳电影节","香港金像奖","奥斯卡金像奖","柏林电影节","金球奖","台湾金马奖","东京电影节","釜山电影节","威尼斯电影节"};
+    private String[] earthNames2 = {"金爵奖-最佳影片","金棕榈奖","最佳编剧","最佳影片","金熊奖","最佳剧情片","最佳编剧","东京电影节大奖","新浪潮奖","金狮奖"};
 
     /**
      * 口碑电影数据集合
@@ -76,6 +86,7 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
 
     private final String YK_TOP100_URL = "http://api.meituan.com/mmdb/movieboard/fixedboard/4.json?offset=0&limit=10&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=000000000000000&ci=1&net=255&dModel=Custom%20Phone%20-%204.3%20-%20API%2018%20-%20768x1280&uuid=2C2C0ECD557F366849954BEF88D0017AC98AD8183EC9108E7D92853C8D3EF972&lat=0.0&lng=0.0&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463712334518&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=7a1d1ed9-473e-49e9-ad52-b1b7bbd5a5b7&__skcy=nXjScwb2c0H8dO0LxNXZGfODzoI%3D";
 
+    private final String ALL_EARTH_URL = "http://api.meituan.com/mmdb/search/movie/tag/list.json?cityId=1&limit=10&offset=0&catId=-1&sourceId=-1&token=&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=000000000000000&ci=1&net=255&dModel=Custom%20Phone%20-%204.3%20-%20API%2018%20-%20768x1280&uuid=2C2C0ECD557F366849954BEF88D0017AC98AD8183EC9108E7D92853C8D3EF972&lat=0.0&lng=0.0&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463704772662&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=2c644d31-1a40-4904-bcf2-4b48ce6dcb32&__skcy=qH5BOZvKW1uc1fPJXxYTMScl4ls%3D";
     /**
      * 没网的页面
      */
@@ -112,6 +123,33 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
     private ImageView ivDr2;
     private ImageView ivDr3;
     private ImageView ivDr4;
+    //  中间横条的3个
+    private ImageView movieIcon1;
+    private ImageView movieIcon2;
+    private ImageView movieIcon3;
+    private TextView movieName1;
+    private TextView movieName2;
+    private TextView movieName3;
+    private TextView movieSc1;
+    private TextView movieSc2;
+    private TextView movieSc3;
+
+    private final String urlQA = "http://m.maoyan.com/movie/78910?_v_=yes";
+    private final String urlCN = "http://m.maoyan.com/movie/79232?_v_=yes";
+    private final String urlGS = "http://m.maoyan.com/movie/78488?_v_=yes";
+    private RecyclerView earthAll;
+    private TextView tvAllJ;
+    //  全球电影的集合
+    private List<EarthBean.ListBean> earthData;
+    private MyEarthAdapter earthAdapter;
+    private Context me;
+    private RecyclerView bottomType1;
+    private RecyclerView bottomType2;
+    private MyBottomAdapter bottom1Adapter;
+    private final int BOTTOM1 = 1;
+    private final int BOTTOM2 = 2;
+    private MyBottomAdapter bottom2Adapter;
+    private TextView allType;
 
     /**
      * Find the Views in the layout<br />
@@ -120,6 +158,8 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
      * (http://www.buzzingandroid.com/tools/android-layout-finder)
      */
     private void findViews() {
+        me = this;
+
         titleYk = (RelativeLayout)findViewById( R.id.title_yk );
         ibYkForback = (ImageButton)findViewById( R.id.ib_yk_forback );
         rlYkTopBg = (RelativeLayout)findViewById( R.id.rl_yk_top_bg );
@@ -148,11 +188,31 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         tvYkNumber4 = (TextView)findViewById( R.id.tv_yk_number4 );
         ivYkSecondicon4 = (ImageView)findViewById( R.id.iv_yk_secondicon4 );
 
+        movieIcon1 = (ImageView) findViewById(R.id.movieicon1);
+        movieIcon2 = (ImageView) findViewById(R.id.movieicon2);
+        movieIcon3 = (ImageView) findViewById(R.id.movieicon3);
+
+        movieName1 = (TextView) findViewById(R.id.moviename1);
+        movieName2 = (TextView) findViewById(R.id.moviename2);
+        movieName3 = (TextView) findViewById(R.id.moviename3);
+
+        movieSc1 = (TextView) findViewById(R.id.moviesc1);
+        movieSc2 = (TextView) findViewById(R.id.moviesc2);
+        movieSc3 = (TextView) findViewById(R.id.moviesc3);
+
 
         ivDr1 = (ImageView) findViewById(R.id.iv_yk_dr1);
         ivDr2 = (ImageView) findViewById(R.id.iv_yk_dr2);
         ivDr3 = (ImageView) findViewById(R.id.iv_yk_dr3);
         ivDr4 = (ImageView) findViewById(R.id.iv_yk_dr4);
+
+        earthAll = (RecyclerView) findViewById(R.id.recy_all_earth);
+        tvAllJ = (TextView) findViewById(R.id.earth_all_j);
+
+        bottomType1 = (RecyclerView) findViewById(R.id.hot_type1);
+        bottomType2 = (RecyclerView) findViewById(R.id.hot_type2);
+
+        allType = (TextView) findViewById(R.id.earth_all_type);
 
         mRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.refresh);
         mRefreshLayout.setSunStyle(true);
@@ -173,6 +233,9 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
             }
         });
 
+        movieIcon1.setOnClickListener(this);
+        movieIcon2.setOnClickListener(this);
+        movieIcon3.setOnClickListener(this);
 
         ibYkForback.setOnClickListener(this);
         rlTop100.setOnClickListener(this);
@@ -187,6 +250,9 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         ivYkSecondicon2.setOnClickListener(this);
         ivYkSecondicon3.setOnClickListener(this);
         ivYkSecondicon4.setOnClickListener(this);
+        tvAllJ.setOnClickListener(this);
+
+        allType.setOnClickListener(this);
         mRefreshLayout.setMaterialRefreshListener(new MyMaterialRefreshListener());
 
     }
@@ -207,6 +273,73 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         mLoadingPager.setVisibility(View.VISIBLE);
         getTopDataFromNet();
         getSecoundDataFromNet();
+        getThirdDataFromNet();
+        getAllEarthDataFromNet();
+
+        setTypeRecycler();
+    }
+
+    private void setTypeRecycler() {
+
+        bottom1Adapter = new MyBottomAdapter(BOTTOM1);
+        RecyclerView.LayoutManager bottom1Mananger = new GridLayoutManager(me,5);
+        bottomType1.setLayoutManager(bottom1Mananger);
+        bottomType1.setAdapter(bottom1Adapter);
+
+        bottom2Adapter = new MyBottomAdapter(BOTTOM2);
+        RecyclerView.LayoutManager bottom2Mananger = new GridLayoutManager(me,5);
+        bottomType2.setLayoutManager(bottom2Mananger);
+        bottomType2.setAdapter(bottom2Adapter);
+    }
+
+    private void getAllEarthDataFromNet() {
+        RequestCall call = OkHttpUtils.get().url(ALL_EARTH_URL).build();
+        call.connTimeOut(10000);
+        call.execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+
+                if (isRefreshing) {
+                    mRefreshLayout.finishRefresh();
+                }
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+//                Log.e("xxx", AMERICA_MOVIE_URL);
+                processAllEarthData(response);
+
+                if (isRefreshing) {
+                    mRefreshLayout.finishRefresh();
+                }
+            }
+        });
+    }
+
+    private void processAllEarthData(String json) {
+        EarthBean earthBean = new Gson().fromJson(json, EarthBean.class);
+        earthData = earthBean.getList();
+
+        earthAdapter = new MyEarthAdapter();
+        RecyclerView.LayoutManager earthManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
+        earthAll.setLayoutManager(earthManager);
+        earthAll.setAdapter(earthAdapter);
+    }
+
+    private void getThirdDataFromNet() {
+        //  亲爱的
+        String imgUrl1 = "http://p1.meituan.net/165.220/movie/6582f47a11fcd0b1097f1cd33ad24f6f92678.jpg";
+        //  超能陆战队
+        String imgUrl2 = "http://p0.meituan.net/165.220/movie/a714b8a0d9cb0806e89c999b2cd9752e738417.jpg";
+        //  敢死队3
+        String imgUrl3 = "http://p0.meituan.net/165.220/movie/7659393df8997cd8ee84428062b41276336380.jpg";
+
+        Glide.with(this).load(imgUrl1).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2).into(movieIcon1);
+        Glide.with(this).load(imgUrl2).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2).into(movieIcon2);
+        Glide.with(this).load(imgUrl3).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.splash_2).error(R.drawable.splash_2).into(movieIcon3);
     }
 
     /**
@@ -448,6 +581,22 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
             bundle.putSerializable("data",mTop100);
             intent.putExtras(bundle);
             startActivity(intent);
+        } else if (v == movieIcon1) {
+            Intent intent = new Intent(this, WebActivity.class);
+            intent.putExtra("url",urlQA);
+            startActivity(intent);
+        } else if (v == movieIcon2) {
+            Intent intent = new Intent(this, WebActivity.class);
+            intent.putExtra("url",urlCN);
+            startActivity(intent);
+        }   else if (v == movieIcon3) {
+            Intent intent = new Intent(this, WebActivity.class);
+            intent.putExtra("url",urlGS);
+            startActivity(intent);
+        } else if (v == tvAllJ){
+//            startActivity(new Intent(this,MostTypeActivity.class));
+        } else if (v == allType){
+            startActivity(new Intent(this,MostTypeActivity.class));
         }
     }
 
@@ -557,4 +706,137 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         }
     }
 
+    private class MyEarthAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            MyEarthAdapter.ViewHolder holder = new ViewHolder(LayoutInflater.from(me)
+                    .inflate(R.layout.earth_recy_item, parent, false));
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            ((MyEarthAdapter.ViewHolder)holder).setData(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return earthData.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+
+            private TextView tvearth1;
+            private TextView tvearth2;
+            private TextView tvearth3;
+
+            private ImageView ivearthicon1;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+
+                tvearth1 = (TextView) itemView.findViewById(R.id.tv_item_earth1);
+                tvearth2 = (TextView) itemView.findViewById(R.id.tv_item_earth2);
+                tvearth3 = (TextView) itemView.findViewById(R.id.tv_item_earth3);
+
+                ivearthicon1 = (ImageView) itemView.findViewById(R.id.earthicon1);
+
+                ivearthicon1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(me, WebActivity.class);
+                        int idE = earthData.get(getLayoutPosition()).getId();
+                        String urlWait = "http://m.maoyan.com/movie/" + idE + "?_v_=yes";
+                        intent.putExtra("url",urlWait);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            public void setData(int position) {
+                EarthBean.ListBean listBean = earthData.get(position);
+
+                tvearth1.setText(earthNames1[position%earthNames1.length]);
+                tvearth3.setText(earthNames2[position%earthNames2.length]);
+
+                tvearth2.setText(listBean.getNm());
+
+                String imgUrl = listBean.getImg();
+                imgUrl = imgUrl.replace("w.h", "165.220");
+
+                Glide.with(me).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.splash_2).error(R.drawable.splash_2).into(ivearthicon1);
+            }
+        }
+    }
+
+    private String[] bottom1Type = {"剧情","喜剧","爱情","动画","动作","恐怖","惊悚","悬疑","冒险","科幻","犯罪"};
+    private String[] bottom2Type = {"大陆","美国","法国","英国","日本"};
+
+    private class MyBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        private int curType;
+
+        public MyBottomAdapter(int typeId){
+            this.curType = typeId;
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            MyBottomAdapter.BottomViewHolder holder = new BottomViewHolder(
+                    LayoutInflater.from(me).inflate(R.layout.item_cell_bottom,parent,false)
+            );
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            switch (curType) {
+                case BOTTOM1 :
+                    ((BottomViewHolder)holder).tv_bottom.setText(bottom1Type[position]);
+                    break;
+                case BOTTOM2 :
+                    ((BottomViewHolder)holder).tv_bottom.setText(bottom2Type[position]);
+                    break;
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            switch (curType) {
+                case BOTTOM1 :
+                    return bottom1Type.length;
+                case BOTTOM2 :
+                    return bottom2Type.length;
+            }
+            return -1;
+        }
+
+        public class BottomViewHolder extends RecyclerView.ViewHolder{
+
+            public TextView tv_bottom;
+
+            public BottomViewHolder(View itemView) {
+                super(itemView);
+
+                tv_bottom = (TextView) itemView.findViewById(R.id.tv_bottom_cell);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(me, MostTypeActivity.class);
+                        switch (curType) {
+                            case BOTTOM1 :
+                                intent.putExtra("tpyeposition",getLayoutPosition()+1);
+                                break;
+                            case BOTTOM2 :
+                                intent.putExtra("placeposition",getLayoutPosition()+1);
+                                break;
+                        }
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+    }
 }

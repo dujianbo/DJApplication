@@ -36,6 +36,7 @@ public class WebActivity extends Activity {
     private ImageButton mBtnForBack;
     private TextView mTvWebTitle;
     private boolean flag = false;
+    private ImageButton mBtnShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class WebActivity extends Activity {
         mNoNetPager = (RelativeLayout) findViewById(R.id.netload_nonet);
         mLoadingPager = (RelativeLayout) findViewById(R.id.netload_load);
         mNoNetButton = (ImageView) findViewById(R.id.iv_netload_nonet);
+        mBtnShare = (ImageButton) findViewById(R.id.ib_web_share);
 
         mNoNetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,14 @@ public class WebActivity extends Activity {
                 mNoNetPager.setVisibility(View.GONE);
                 mLoadingPager.setVisibility(View.VISIBLE);
                 mWebView.loadUrl(url);
+            }
+        });
+
+        mBtnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //  分享按钮
+//                showShare();
             }
         });
 

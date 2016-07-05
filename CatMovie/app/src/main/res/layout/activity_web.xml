@@ -29,6 +29,15 @@
             android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/ib_web_share"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_title_selector"
+            android:src="@drawable/a5j"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <RelativeLayout

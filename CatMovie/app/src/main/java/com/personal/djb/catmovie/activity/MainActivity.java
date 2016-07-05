@@ -251,6 +251,7 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         currentCity = posCity;
+                        CacheUtils.putString(MainActivity.this,"currcity",currentCity);
                         ((CinemaRadioButtonPager)datas.get(1)).setCityName(currentCity);
                         ((MovieRadioButtonPager)datas.get(0)).setCityName(currentCity);
                     }
@@ -280,6 +281,12 @@ public class MainActivity extends FragmentActivity {
 
     public void setOnAtivityResult(OnAtivityResult onAtivityResult) {
         this.onAtivityResult = onAtivityResult;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        CacheUtils.putString(this, "currcity", currentCity);
     }
 
     @Override

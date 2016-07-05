@@ -65,6 +65,7 @@
 
 
             <RelativeLayout
+                android:visibility="visible"
                 android:id="@+id/rl_yk_top_bg"
                 android:layout_width="match_parent"
                 android:layout_height="170dp">
@@ -412,15 +413,236 @@
 
             </LinearLayout>
             
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/ll_threemovie"
+                android:orientation="vertical"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_ga_selector"
                 android:layout_below="@+id/ll_cell_dingwei"
                 android:layout_width="match_parent"
-                android:layout_height="180dp">
+                android:layout_height="240dp">
+
+                <TextView
+                    android:paddingLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="每日推荐"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="right"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/movieicon1"
+                            android:scaleType="fitXY"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/splash_2"
+                            android:layout_width="100dp"
+                            android:layout_height="130dp" />
+
+                        <TextView
+                            android:id="@+id/moviename1"
+                            android:textSize="14sp"
+                            android:layout_marginTop="8dp"
+                            android:text="亲爱的"
+                            android:paddingLeft="14dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/moviesc1"
+                            android:layout_marginTop="5dp"
+                            android:textSize="12sp"
+                            android:paddingLeft="14dp"
+                            android:text="9.2分"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_width="0dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/movieicon2"
+                            android:scaleType="fitXY"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/splash_2"
+                            android:layout_width="100dp"
+                            android:layout_height="130dp" />
+
+                        <TextView
+                            android:id="@+id/moviename2"
+                            android:textSize="14sp"
+                            android:layout_marginTop="8dp"
+                            android:text="超能陆战队"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/moviesc2"
+                            android:layout_marginTop="5dp"
+                            android:textSize="12sp"
+                            android:text="9.6分"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/movieicon3"
+                            android:scaleType="fitXY"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/splash_2"
+                            android:layout_width="100dp"
+                            android:layout_height="130dp" />
+
+                        <TextView
+                            android:id="@+id/moviename3"
+                            android:paddingRight="14dp"
+                            android:textSize="14sp"
+                            android:layout_marginTop="8dp"
+                            android:text="敢死队3"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/moviesc3"
+                            android:layout_marginTop="5dp"
+                            android:textSize="12sp"
+                            android:paddingRight="14dp"
+                            android:text="9.2分"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_earth_ll"
+                android:paddingTop="12dp"
+                android:orientation="vertical"
+                android:layout_below="@+id/ll_threemovie"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="310dp">
+
+                <TextView
+                    android:paddingLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="全球电影奖项"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recy_all_earth"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
 
 
-            </RelativeLayout>
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="#f1f1f1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/earth_all_j"
+                    android:textColor="#dd403b"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:text="全部电影奖项"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical"
+                android:layout_below="@+id/ll_earth_ll"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:paddingLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:text="热门分类"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/hot_type1"
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/hot_type2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="#f1f1f1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/earth_all_type"
+                    android:textColor="#dd403b"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:text="全部分类"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+
+
         </RelativeLayout>
 
     </ScrollView>

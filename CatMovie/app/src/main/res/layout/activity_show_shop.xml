@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.personal.djb.catmovie.activity.ShowShopActivity">
+
+    <RelativeLayout
+        android:id="@+id/title_show_shop"
+        android:layout_width="match_parent"
+        android:minHeight="50dp"
+        android:background="#dd403b"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:id="@+id/title_show_shop_back"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_title_selector"
+            android:src="@drawable/je"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_toRightOf="@id/title_show_shop_back"
+            android:background="#68000000"
+            android:layout_centerVertical="true"
+            android:layout_width="1dp"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:text="分类列表"
+            android:layout_toRightOf="@+id/title_show_shop_back"
+            android:layout_centerVertical="true"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/title_show_shop"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/tv_show_shop1"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:clickable="true"
+            android:textColor="@drawable/pop_text_color_selector"
+            android:text="系列/主题"
+            android:paddingRight="26dp"
+            android:paddingLeft="26dp"
+            android:drawableRight="@drawable/text_right_selector"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_show_shop2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:clickable="true"
+            android:textSize="14sp"
+            android:paddingRight="26dp"
+            android:paddingLeft="26dp"
+            android:textColor="@drawable/pop_text_color_selector"
+            android:text="分类"
+            android:drawableRight="@drawable/text_right_selector"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_show_shop3"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@drawable/pop_text_color_selector"
+            android:text="排序"
+            android:clickable="true"
+            android:layout_width="0dp"
+            android:drawableRight="@drawable/text_right_selector"
+            android:paddingRight="26dp"
+            android:paddingLeft="26dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="30dp"
+        android:id="@+id/show_shop_recy"
+        android:layout_below="@+id/title_show_shop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--使背景变灰-->
+    <View
+        android:id="@+id/main_darkview"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/title_show_shop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_bg"
+        android:visibility="gone" />
+</RelativeLayout>

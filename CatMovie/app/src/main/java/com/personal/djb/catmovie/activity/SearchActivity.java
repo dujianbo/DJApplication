@@ -58,8 +58,8 @@ public class SearchActivity extends Activity {
     private RecyclerView mTypeSearchRecyclerView;
     private RecyclerView mPlaceSearchRecyclerView;
 
-    private String[] types = {"剧情","喜剧","爱情","动画","动作","恐怖","惊悚","悬疑","冒险","科幻","犯罪","战争","纪录片","其他",};
-    private String[] places = {"大陆","美国","法国","英国","日本","韩国","印度","泰国","港台","德国","其他",};
+    private String[] types = {"剧情","喜剧","爱情","动画","动作","恐怖","惊悚","悬疑","冒险","科幻","犯罪","战争","纪录片","其他"};
+    private String[] places = {"大陆","美国","法国","英国","日本","韩国","印度","泰国","港台","德国","其他"};
 
     private String HOT_SEARCH_URL = "http://api.meituan.com/mmdb/search/movie/hotword/list.json?token=&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=860311023305964&ci=1&net=255&dModel=MI%203&uuid=F096369352E4004DD3758BF83FE24AC312445F9B51AD3D8FCE2A0CD57754F6E4&lat=40.099064&lng=116.379351&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463657899016&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=23e3e90e-007e-4607-a43f-b3d609838bb8&__skcy=2MBnuWHEtyH9WJldBe5hskKYlgM%3D";
     private MyAdapter adapter;

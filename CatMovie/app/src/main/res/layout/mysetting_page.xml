@@ -333,7 +333,7 @@
                         android:paddingLeft="16dp"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:text="影院会员卡"
+                        android:text="我的购物车"
                         android:clickable="true"
                         android:layout_width="0dp"
                         android:layout_weight="1"
