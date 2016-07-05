@@ -1,538 +1,582 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:id="@+id/my_head"
-        android:background="#dd403b"
-        android:minHeight="110dp"
-        android:layout_width="match_parent"
-        android:layout_height="110dp">
-        
-        <ImageView
-            android:id="@+id/iv_my_user_icon"
-            android:layout_centerVertical="true"
-            android:background="@drawable/backgroud_logo"
-            android:layout_width="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_height="60dp" />
-
-
-        <ImageView
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/triangle01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:textSize="18sp"
-            android:text="立即登录"
-            android:visibility="gone"
-            android:gravity="center_vertical"
-            android:clickable="true"
-            android:textColor="@drawable/tv_chick_color"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/iv_my_user_icon"
-            android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <RelativeLayout
-            android:id="@+id/ll_my_user_islogin"
-            android:visibility="visible"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/iv_my_user_icon"
-            android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_my_islogin_username"
-                android:textSize="16sp"
-                android:text="大地"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:textColor="@drawable/tv_chick_color"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/tv_my_islogin_level"
-                android:layout_marginTop="2dp"
-                android:textColor="@drawable/tv_chick_color"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:clickable="true"
-                android:textSize="10sp"
-                android:layout_below="@id/tv_my_islogin_username"
-                android:gravity="center"
-                android:text="V2 白银会员"
-                android:background="@drawable/my_user_icon_bg_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp" />
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:background="#ffffff"
+    <ScrollView
+        android:id="@+id/my_setting_page_islogin"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/rl_islogin"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RadioGroup
-                android:id="@+id/my_islogin_rg"
-                android:background="#ffffff"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:orientation="horizontal"
+            <RelativeLayout
+                android:id="@+id/my_head"
+                android:background="#dd403b"
+                android:minHeight="110dp"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
-                <RadioButton
-                    android:id="@+id/my_rg1_1"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:gravity="top|center_horizontal"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="5dp"
-                    android:textSize="12sp"
-                    android:text="想看 0"
-                    android:drawableTop="@drawable/vi"
-                    android:layout_height="match_parent" />
-                <RadioButton
-                    android:id="@+id/my_rg1_2"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:gravity="top|center_horizontal"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="5dp"
-                    android:textSize="12sp"
-                    android:text="看过 9"
-                    android:drawableTop="@drawable/vf"
-                    android:layout_height="match_parent" />
-                <RadioButton
-                    android:id="@+id/my_rg1_3"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:gravity="top|center_horizontal"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="5dp"
-                    android:textSize="12sp"
-                    android:text="影评 5"
-                    android:drawableTop="@drawable/va"
-                    android:layout_height="match_parent" />
-                <RadioButton
-                    android:id="@+id/my_rg1_4"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:gravity="top|center_horizontal"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="5dp"
-                    android:textSize="12sp"
-                    android:text="话题 0"
-                    android:drawableTop="@drawable/vh"
-                    android:layout_height="match_parent" />
-            </RadioGroup>
-            
-            <TextView
-                android:layout_below="@id/my_islogin_rg"
-                android:background="#f1f1f1"
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-            
-            <LinearLayout
-                android:id="@+id/ll_my_ll_order"
-                android:layout_below="@+id/my_islogin_rg"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="110dp">
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
-
-                    <TextView
-                        android:id="@+id/my_my_order"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:text="我的订单"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/my_my_order_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text="全部"
-                        android:drawablePadding="8dp"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <RadioGroup
-                    android:id="@+id/my_islogin_order_rg"
-                    android:background="#ffffff"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp">
-                    <RadioButton
-                        android:id="@+id/my_rg2_1"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:gravity="top|center_horizontal"
-                        android:button="@android:color/transparent"
-                        android:drawablePadding="5dp"
-                        android:textSize="12sp"
-                        android:text="未消费"
-                        android:drawableTop="@drawable/vo"
-                        android:layout_height="match_parent" />
-                    <RadioButton
-                        android:id="@+id/my_rg2_2"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:gravity="top|center_horizontal"
-                        android:button="@android:color/transparent"
-                        android:drawablePadding="5dp"
-                        android:textSize="12sp"
-                        android:text="待付款"
-                        android:drawableTop="@drawable/vn"
-                        android:layout_height="match_parent" />
-                    <RadioButton
-                        android:id="@+id/my_rg2_3"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:gravity="top|center_horizontal"
-                        android:button="@android:color/transparent"
-                        android:drawablePadding="5dp"
-                        android:textSize="12sp"
-                        android:text="待评价"
-                        android:drawableTop="@drawable/vm"
-                        android:layout_height="match_parent" />
-                    <RadioButton
-                        android:id="@+id/my_rg2_4"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:gravity="top|center_horizontal"
-                        android:button="@android:color/transparent"
-                        android:drawablePadding="5dp"
-                        android:textSize="12sp"
-                        android:text="退款"
-                        android:drawableTop="@drawable/vk"
-                        android:layout_height="match_parent" />
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_below="@+id/ll_my_ll_order"
-                android:background="#f1f1f1"
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_my_ll_you"
-                android:layout_below="@+id/ll_my_ll_mess"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="160dp">
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-
-                    <TextView
-                        android:id="@+id/my_you"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:text="优惠劵"
-                        android:clickable="true"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/my_you_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text="0张可用"
-                        android:clickable="true"
-                        android:drawablePadding="8dp"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_my_user_icon"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/backgroud_logo"
+                    android:layout_width="60dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_height="60dp" />
 
 
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-
-                    <TextView
-                        android:id="@+id/my_monpack"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:clickable="true"
-                        android:text="我的钱包"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/my_monpack_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text="余额 : 0元"
-                        android:drawablePadding="8dp"
-                        android:clickable="true"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-
-                    <TextView
-                        android:id="@+id/my_huiycard"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:text="我的购物车"
-                        android:clickable="true"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/my_huiycard_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text=""
-                        android:textColor="#f90000"
-                        android:clickable="true"
-                        android:drawablePadding="8dp"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-
-                    <TextView
-                        android:id="@+id/my_shoping"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:clickable="true"
-                        android:textSize="14sp"
-                        android:text="商城"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/my_shoping_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:clickable="true"
-                        android:text=""
-                        android:drawablePadding="8dp"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_below="@+id/ll_my_ll_you"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
-
-                <TextView
-                    android:id="@+id/my_setting"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
-                    android:text="设置"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/my_setting_right"
-                    android:drawableRight="@drawable/jiantou_selector"
+                <ImageView
                     android:layout_marginRight="16dp"
-                    android:text=""
-                    android:drawablePadding="8dp"
-                    android:enabled="false"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/triangle01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </LinearLayout>
 
-            <TextView
-                android:layout_below="@+id/ll_my_ll_you"
-                android:background="#f1f1f1"
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
+                <RelativeLayout
+                    android:id="@+id/ll_my_user_islogin"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/iv_my_user_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:layout_below="@+id/ll_my_ll_mess"
-                android:background="#f1f1f1"
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
+                    <TextView
+                        android:id="@+id/tv_my_islogin_username"
+                        android:textSize="16sp"
+                        android:text="大地"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:textColor="@drawable/tv_chick_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_my_islogin_level"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@drawable/tv_chick_color"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:clickable="true"
+                        android:textSize="10sp"
+                        android:layout_below="@id/tv_my_islogin_username"
+                        android:gravity="center"
+                        android:text="V2 白银会员"
+                        android:background="@drawable/my_user_icon_bg_selector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/ll_my_ll_mess"
-                android:layout_below="@+id/ll_my_ll_order"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical"
+                android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:layout_height="120dp">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
+                <RelativeLayout
+                    android:id="@+id/rl_islogin"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="match_parent">
+
+                    <RadioGroup
+                        android:id="@+id/my_islogin_rg"
+                        android:background="#ffffff"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+                        <RadioButton
+                            android:id="@+id/my_rg1_1"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:gravity="top|center_horizontal"
+                            android:button="@android:color/transparent"
+                            android:drawablePadding="5dp"
+                            android:textSize="12sp"
+                            android:text="想看 0"
+                            android:drawableTop="@drawable/vi"
+                            android:layout_height="match_parent" />
+                        <RadioButton
+                            android:id="@+id/my_rg1_2"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:gravity="top|center_horizontal"
+                            android:button="@android:color/transparent"
+                            android:drawablePadding="5dp"
+                            android:textSize="12sp"
+                            android:text="看过 9"
+                            android:drawableTop="@drawable/vf"
+                            android:layout_height="match_parent" />
+                        <RadioButton
+                            android:id="@+id/my_rg1_3"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:gravity="top|center_horizontal"
+                            android:button="@android:color/transparent"
+                            android:drawablePadding="5dp"
+                            android:textSize="12sp"
+                            android:text="影评 5"
+                            android:drawableTop="@drawable/va"
+                            android:layout_height="match_parent" />
+                        <RadioButton
+                            android:id="@+id/my_rg1_4"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:gravity="top|center_horizontal"
+                            android:button="@android:color/transparent"
+                            android:drawablePadding="5dp"
+                            android:textSize="12sp"
+                            android:text="话题 0"
+                            android:drawableTop="@drawable/vh"
+                            android:layout_height="match_parent" />
+                    </RadioGroup>
 
                     <TextView
-                        android:id="@+id/my_message"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:clickable="true"
-                        android:text="我的消息"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        android:layout_below="@id/my_islogin_rg"
+                        android:background="#f1f1f1"
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_my_ll_order"
+                        android:layout_below="@+id/my_islogin_rg"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp">
+
+                            <TextView
+                                android:id="@+id/my_my_order"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:text="我的订单"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_my_order_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text="全部"
+                                android:drawablePadding="8dp"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/my_islogin_order_rg"
+                            android:background="#ffffff"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+                            <RadioButton
+                                android:id="@+id/my_rg2_1"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="top|center_horizontal"
+                                android:button="@android:color/transparent"
+                                android:drawablePadding="5dp"
+                                android:textSize="12sp"
+                                android:text="未消费"
+                                android:drawableTop="@drawable/vo"
+                                android:layout_height="match_parent" />
+                            <RadioButton
+                                android:id="@+id/my_rg2_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="top|center_horizontal"
+                                android:button="@android:color/transparent"
+                                android:drawablePadding="5dp"
+                                android:textSize="12sp"
+                                android:text="待付款"
+                                android:drawableTop="@drawable/vn"
+                                android:layout_height="match_parent" />
+                            <RadioButton
+                                android:id="@+id/my_rg2_3"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="top|center_horizontal"
+                                android:button="@android:color/transparent"
+                                android:drawablePadding="5dp"
+                                android:textSize="12sp"
+                                android:text="待评价"
+                                android:drawableTop="@drawable/vm"
+                                android:layout_height="match_parent" />
+                            <RadioButton
+                                android:id="@+id/my_rg2_4"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:gravity="top|center_horizontal"
+                                android:button="@android:color/transparent"
+                                android:drawablePadding="5dp"
+                                android:textSize="12sp"
+                                android:text="退款"
+                                android:drawableTop="@drawable/vk"
+                                android:layout_height="match_parent" />
+                        </RadioGroup>
+
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/my_message_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text=""
-                        android:clickable="true"
-                        android:drawablePadding="8dp"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                        android:layout_below="@+id/ll_my_ll_order"
+                        android:background="#f1f1f1"
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_my_ll_you"
+                        android:layout_below="@+id/ll_my_ll_mess"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <TextView
+                                android:id="@+id/my_you"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:text="优惠劵"
+                                android:clickable="true"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_you_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text="0张可用"
+                                android:clickable="true"
+                                android:drawablePadding="8dp"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <TextView
+                                android:id="@+id/my_monpack"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:clickable="true"
+                                android:text="我的钱包"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_monpack_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text="余额 : 0元"
+                                android:drawablePadding="8dp"
+                                android:clickable="true"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <TextView
+                                android:id="@+id/my_huiycard"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:text="我的购物车"
+                                android:clickable="true"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_huiycard_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text=""
+                                android:textColor="#f90000"
+                                android:clickable="true"
+                                android:drawablePadding="8dp"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <TextView
+                                android:id="@+id/my_shoping"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:clickable="true"
+                                android:textSize="14sp"
+                                android:text="商城"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_shoping_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:clickable="true"
+                                android:text=""
+                                android:drawablePadding="8dp"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_below="@+id/ll_my_ll_you"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <TextView
+                            android:id="@+id/my_setting"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="16dp"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:text="设置"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:id="@+id/my_setting_right"
+                            android:drawableRight="@drawable/jiantou_selector"
+                            android:layout_marginRight="16dp"
+                            android:text=""
+                            android:drawablePadding="8dp"
+                            android:enabled="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/my_huiyuan"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:text="会员中心"
-                        android:clickable="true"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        android:layout_below="@+id/ll_my_ll_you"
+                        android:background="#f1f1f1"
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
 
                     <TextView
-                        android:id="@+id/my_huiyuan_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text="V2白银会员"
-                        android:drawablePadding="8dp"
-                        android:textColor="#ff0000"
-                        android:clickable="true"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                        android:layout_below="@+id/ll_my_ll_mess"
+                        android:background="#f1f1f1"
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
 
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    <LinearLayout
+                        android:id="@+id/ll_my_ll_mess"
+                        android:layout_below="@+id/ll_my_ll_order"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
 
-                    <TextView
-                        android:id="@+id/my_chengj"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="16dp"
-                        android:textColor="#000000"
-                        android:clickable="true"
-                        android:textSize="14sp"
-                        android:text="我的成就"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
 
-                    <TextView
-                        android:id="@+id/my_chengj_right"
-                        android:drawableRight="@drawable/jiantou_selector"
-                        android:layout_marginRight="16dp"
-                        android:text="达成新成就"
-                        android:textColor="#f90000"
-                        android:drawablePadding="8dp"
-                        android:clickable="true"
-                        android:enabled="false"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                            <TextView
+                                android:id="@+id/my_message"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:clickable="true"
+                                android:text="我的消息"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_message_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text=""
+                                android:clickable="true"
+                                android:drawablePadding="8dp"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <TextView
+                                android:id="@+id/my_huiyuan"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:text="会员中心"
+                                android:clickable="true"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_huiyuan_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text="V2白银会员"
+                                android:drawablePadding="8dp"
+                                android:textColor="#ff0000"
+                                android:clickable="true"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp">
+
+                            <TextView
+                                android:id="@+id/my_chengj"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:textColor="#000000"
+                                android:clickable="true"
+                                android:textSize="14sp"
+                                android:text="我的成就"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/my_chengj_right"
+                                android:drawableRight="@drawable/jiantou_selector"
+                                android:layout_marginRight="16dp"
+                                android:text="达成新成就"
+                                android:textColor="#f90000"
+                                android:drawablePadding="8dp"
+                                android:clickable="true"
+                                android:enabled="false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/my_setting_page_nologin"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/my_head_nologin"
+            android:background="#dd403b"
+            android:minHeight="110dp"
+            android:layout_width="match_parent"
+            android:layout_height="110dp">
+
+            <ImageView
+                android:id="@+id/iv_my_user_icon_nologin"
+                android:layout_centerVertical="true"
+                android:background="@drawable/backgroud_logo"
+                android:layout_width="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_height="60dp" />
+
+
+            <ImageView
+                android:layout_marginRight="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/triangle01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/fast_login_nologin"
+                android:textSize="18sp"
+                android:text="立即登录"
+                android:visibility="visible"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:textColor="@drawable/tv_chick_color"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/iv_my_user_icon_nologin"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_nologiin"
-            android:visibility="gone"
+            android:layout_below="@+id/my_head_nologin"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -544,6 +588,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Button
+                    android:id="@+id/xiangkan"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:gravity="top|center_horizontal"
@@ -554,6 +599,7 @@
                     android:drawableTop="@drawable/vi"
                     android:layout_height="match_parent" />
                 <Button
+                    android:id="@+id/kanguo"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:gravity="top|center_horizontal"
@@ -564,6 +610,7 @@
                     android:drawableTop="@drawable/vf"
                     android:layout_height="match_parent" />
                 <Button
+                    android:id="@+id/yingping"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:gravity="top|center_horizontal"
@@ -574,6 +621,7 @@
                     android:drawableTop="@drawable/va"
                     android:layout_height="match_parent" />
                 <Button
+                    android:id="@+id/huati_setting"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:gravity="top|center_horizontal"
@@ -584,9 +632,8 @@
                     android:drawableTop="@drawable/vh"
                     android:layout_height="match_parent" />
             </LinearLayout>
-
         </RelativeLayout>
-    </RelativeLayout>
 
-</LinearLayout>
-</ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

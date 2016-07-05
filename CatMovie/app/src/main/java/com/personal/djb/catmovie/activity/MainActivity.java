@@ -32,7 +32,8 @@ public class MainActivity extends FragmentActivity {
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
 
-
+    public static final int LOGIN_STATE_SUCCESS = 999;
+    public static final int LOGIN_STATE_ERROR = 888;
 
     private FrameLayout mFrameContent;
     private RadioGroup mRadioGroup;
@@ -265,11 +266,24 @@ public class MainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (onAtivityResult != null && data != null) {
+//        if (onAtivityResult != null && data != null) {
+//            currentCity = data.getStringExtra("cityname");
+//            ((CinemaRadioButtonPager)datas.get(1)).setCityName(currentCity);
+//            ((MovieRadioButtonPager)datas.get(0)).setCityName(currentCity);
+//            onAtivityResult.onResult(requestCode,resultCode,data);
+//        }
+        if (requestCode == 100 || requestCode == 101) {
             currentCity = data.getStringExtra("cityname");
             ((CinemaRadioButtonPager)datas.get(1)).setCityName(currentCity);
             ((MovieRadioButtonPager)datas.get(0)).setCityName(currentCity);
-            onAtivityResult.onResult(requestCode,resultCode,data);
+        }
+
+        if (requestCode == 300 && resultCode == LOGIN_STATE_SUCCESS) {
+            datas.get(3).initData();
+        }
+
+        if (requestCode == 300 && resultCode == LOGIN_STATE_ERROR) {
+            datas.get(3).initData();
         }
     }
 
