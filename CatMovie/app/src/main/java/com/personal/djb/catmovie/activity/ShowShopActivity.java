@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,7 @@ public class ShowShopActivity extends Activity {
             popupWindow.dismiss();
         } else {
             popupWindow.showAsDropDown(mTvBtn1);
-            popupWindow.setAnimationStyle(-1);
+//            popupWindow.setAnimationStyle(-1);
             //背景变暗
             darkView.startAnimation(animIn);
             darkView.setVisibility(View.VISIBLE);
@@ -126,7 +127,9 @@ public class ShowShopActivity extends Activity {
 
         popupWindow.setContentView(view);
         popupWindow.setBackgroundDrawable(new PaintDrawable());
-        popupWindow.setFocusable(true);
+//        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(false);
 
         popupWindow.setHeight(ScreenUtils.getScreenH(this) * 3 / 5);
         popupWindow.setWidth(ScreenUtils.getScreenW(this));
@@ -160,6 +163,15 @@ public class ShowShopActivity extends Activity {
                 Toast.makeText(me, list.get(position), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private List<String> list1;

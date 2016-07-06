@@ -19,7 +19,12 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 
 public class LoginActivity extends Activity implements View.OnClickListener{
 
@@ -75,6 +80,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         qq.setOnClickListener(this);
         weibo.setOnClickListener(this);
         weixin.setOnClickListener(this);
+        tvNumberLogin.setOnClickListener(this);
     }
 
     /**
@@ -100,7 +106,29 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         } else if ( v == weixin) {
             SHARE_MEDIA platform = SHARE_MEDIA.WEIXIN;
             mShareAPI.doOauthVerify(this, platform, umAuthListener);
+        } else if ( v == tvNumberLogin) {
+            //打开注册页面
+            RegisterPage registerPage = new RegisterPage();
+            registerPage.setRegisterCallback(new EventHandler() {
+                public void afterEvent(int event, int result, Object data) {
+                    // 解析注册结果
+                    if (result == SMSSDK.RESULT_COMPLETE) {
+                        @SuppressWarnings("unchecked")
+                        HashMap<String,Object> phoneMap = (HashMap<String, Object>) data;
+                        String country = (String) phoneMap.get("country");
+                        String phone = (String) phoneMap.get("phone");
+
+                        // 提交用户信息
+                        registerUser(country, phone);
+                    }
+                }
+            });
+            registerPage.show(LoginActivity.this);
         }
+    }
+
+    private void registerUser(String country, String phone) {
+        Toast.makeText(LoginActivity.this, "country:" + country + "，phone:" + phone, Toast.LENGTH_SHORT).show();
     }
 
     private UMAuthListener umAuthListener = new UMAuthListener() {

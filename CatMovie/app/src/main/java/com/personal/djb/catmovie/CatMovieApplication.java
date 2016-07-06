@@ -8,6 +8,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import cn.smssdk.SMSSDK;
 import okhttp3.OkHttpClient;
 
 /**
@@ -25,6 +26,8 @@ public class CatMovieApplication extends Application {
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                         //其他配置
                 .build();
+
+        SMSSDK.initSDK(this, "14aa2ec3f841c", "e55c0ce91902a9a60b5e9edc0b14951f");
 
         OkHttpUtils.initClient(okHttpClient);
 
