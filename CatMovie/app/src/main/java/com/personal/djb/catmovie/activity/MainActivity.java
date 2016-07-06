@@ -272,7 +272,7 @@ public class MainActivity extends FragmentActivity {
 //            ((MovieRadioButtonPager)datas.get(0)).setCityName(currentCity);
 //            onAtivityResult.onResult(requestCode,resultCode,data);
 //        }
-        if (requestCode == 100 || requestCode == 101) {
+        if ((requestCode == 100 && data != null)|| (requestCode == 101 && data != null)) {
             currentCity = data.getStringExtra("cityname");
             ((CinemaRadioButtonPager)datas.get(1)).setCityName(currentCity);
             ((MovieRadioButtonPager)datas.get(0)).setCityName(currentCity);
@@ -284,6 +284,7 @@ public class MainActivity extends FragmentActivity {
 
         if (requestCode == 300 && resultCode == LOGIN_STATE_ERROR) {
             datas.get(3).initData();
+            datas.get(1).initData();
         }
     }
 

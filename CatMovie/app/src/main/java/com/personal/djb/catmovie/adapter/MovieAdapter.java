@@ -401,6 +401,14 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
 
             findView(itemView);
+
+            mHotMovieIcon.setOnClickListener(new View.OnClickListener() {
+                //  链接到播放器
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
         /**

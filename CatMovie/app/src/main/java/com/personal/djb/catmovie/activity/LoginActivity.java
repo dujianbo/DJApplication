@@ -73,6 +73,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         btnNoPassword.setOnClickListener( this );
         btnLogin.setOnClickListener( this );
         qq.setOnClickListener(this);
+        weibo.setOnClickListener(this);
+        weixin.setOnClickListener(this);
     }
 
     /**
@@ -91,6 +93,12 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             Toast.makeText(LoginActivity.this, "登录", Toast.LENGTH_SHORT).show();
         } else if ( v == qq) {
             SHARE_MEDIA platform = SHARE_MEDIA.QQ;
+            mShareAPI.doOauthVerify(this, platform, umAuthListener);
+        } else if ( v == weibo) {
+            SHARE_MEDIA platform = SHARE_MEDIA.SINA;
+            mShareAPI.doOauthVerify(this, platform, umAuthListener);
+        } else if ( v == weixin) {
+            SHARE_MEDIA platform = SHARE_MEDIA.WEIXIN;
             mShareAPI.doOauthVerify(this, platform, umAuthListener);
         }
     }

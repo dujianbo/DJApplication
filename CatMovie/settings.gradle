@@ -1,1 +1,1 @@
-include ':app', 'MaterialRefreshLayout_library', ':sticky_headers_library'
+include ':app', 'MaterialRefreshLayout_library', ':sticky_headers_library', ':vitamio'

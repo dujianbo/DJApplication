@@ -1,6 +1,7 @@
 package com.personal.djb.catmovie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -20,8 +21,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.LoginActivity;
+import com.personal.djb.catmovie.activity.MainActivity;
 import com.personal.djb.catmovie.bean.cinema.CinemaBean;
 import com.personal.djb.catmovie.bean.movies.HotMovieHeadPagerBean;
+import com.personal.djb.catmovie.utils.CacheUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -332,6 +336,13 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mSales = (TextView) itemView.findViewById(R.id.tv_item_desc2);
             mCinemaLength = (TextView) itemView.findViewById(R.id.cinema_length);
 
+            mCineaLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity)context).startActivityForResult(new Intent(context, LoginActivity.class), 300);
+                }
+            });
+
         }
 
         /**
@@ -342,7 +353,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             CinemaBean.BaseBean baseBean = data.get(position);
 
             mCineaTitle.setVisibility(View.GONE);
-            if (getLayoutPosition() == 1) {
+            if (getLayoutPosition() == 1 && !CacheUtils.getBoolean(context,"islogin")) {
                 mCineaTitle.setVisibility(View.VISIBLE);
             }
 

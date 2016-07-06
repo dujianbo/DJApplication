@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.VideoActivity;
 import com.personal.djb.catmovie.activity.WebActivity;
 import com.personal.djb.catmovie.bean.movies.outmoviebean.AmericaMovieBean;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
@@ -223,6 +224,16 @@ public class AmericaMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     String urlHot = "http://m.maoyan.com/movie/" + idHot + "?_v_=yes";
                     Intent intent = new Intent(context, WebActivity.class);
                     intent.putExtra("url", urlHot);
+                    context.startActivity(intent);
+                }
+            });
+
+
+            mHotMovieIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, VideoActivity.class);
+                    intent.putExtra("videoUrl",datas.get(getLayoutPosition() - 1).getVideourl());
                     context.startActivity(intent);
                 }
             });
