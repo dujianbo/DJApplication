@@ -17,6 +17,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
+import com.igexin.sdk.PushManager;
 import com.personal.djb.catmovie.R;
 import com.personal.djb.catmovie.base.BasePager;
 import com.personal.djb.catmovie.pagers.CinemaRadioButtonPager;
@@ -60,6 +61,10 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        PushManager.getInstance().initialize(this.getApplicationContext());
+
+        String clientid = PushManager.getInstance().getClientid(this);
+        Log.e("TAG555", clientid);
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
 

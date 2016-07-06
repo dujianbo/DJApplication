@@ -10,6 +10,17 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        manifestPlaceholders = [
+                GETUI_APP_ID : "PQQ5XxYSuS6trVK7LaOwa6",
+                GETUI_APP_KEY : "b1afzXSFFv8mNKP548S495",
+                GETUI_APP_SECRET : "YrfcJLVbQN7TdLOaqypoj9",
+                PACKAGE_NAME : applicationId
+        ]
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "mips", "mips64", "x86", "x86_64"
+        }
     }
     buildTypes {
         release {
@@ -45,4 +56,5 @@ dependencies {
     compile files('libs/weiboSDKCore_3.1.4.jar')
     compile files('libs/SocialSDK_WeiXin_1.jar')
     compile project(':vitamio')
+    compile 'com.getui:sdk:+'
 }

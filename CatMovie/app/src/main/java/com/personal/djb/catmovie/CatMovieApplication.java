@@ -30,7 +30,7 @@ public class CatMovieApplication extends Application {
 
         NetUtils.initInstance(this);
 
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setWeixin("wx253123b400f1b960", "822cf35e2efecaf4b276ada01840fdcb");
         //微信 appid appsecret
         PlatformConfig.setSinaWeibo("2794591820", "b45989fb4a0372d64b652068d7e306dd");
         //新浪微博 appkey appsecret
