@@ -54,6 +54,13 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private ImageView qq;
     private ImageView qqzone;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mShareAPI.onActivityResult(requestCode, resultCode, data);
+    }
+
+
     /**
      * Find the Views in the layout<br />
      * <br />
@@ -95,6 +102,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             finish();
         } else if ( v == btnNoPassword ) {
             Toast.makeText(LoginActivity.this, "忘记密码", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,ERCodeActivity.class));
         } else if ( v == btnLogin ) {
             Toast.makeText(LoginActivity.this, "登录", Toast.LENGTH_SHORT).show();
         } else if ( v == qq) {
@@ -159,12 +167,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             }
         }
     };
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mShareAPI.onActivityResult(requestCode, resultCode, data);
-    }
 
     public interface OnShouQuanBack{
         void onSuccess();
