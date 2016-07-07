@@ -1,9 +1,5 @@
 package cn.itguy.zxingportrait;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
@@ -18,6 +14,15 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.Result;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+
 import cn.itguy.zxingportrait.camera.CameraManager;
 import cn.itguy.zxingportrait.control.AmbientLightManager;
 import cn.itguy.zxingportrait.control.BeepManager;
@@ -25,10 +30,6 @@ import cn.itguy.zxingportrait.decode.CaptureActivityHandler;
 import cn.itguy.zxingportrait.decode.FinishListener;
 import cn.itguy.zxingportrait.decode.InactivityTimer;
 import cn.itguy.zxingportrait.view.ViewfinderView;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.Result;
 
 public class CaptureActivity extends Activity implements
 		SurfaceHolder.Callback {

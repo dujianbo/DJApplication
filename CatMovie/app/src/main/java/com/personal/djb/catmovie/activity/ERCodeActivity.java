@@ -17,6 +17,7 @@ public class ERCodeActivity extends CaptureActivity {
         
         Toast.makeText(ERCodeActivity.this, rawResult.getText(), Toast.LENGTH_SHORT).show();
 
+        finish();
         //  添加下列语句可以连续扫描
 //        restartPreviewAfterDelay(0L);
     }

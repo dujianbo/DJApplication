@@ -63,8 +63,9 @@ public class MainActivity extends FragmentActivity {
 
         PushManager.getInstance().initialize(this.getApplicationContext());
 
-        String clientid = PushManager.getInstance().getClientid(this);
-        Log.e("TAG555", clientid);
+        //  自己log出来CID比较靠谱
+//        String clientid = PushManager.getInstance().getClientid(this);
+//        Log.e("TAG555", clientid);
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
 

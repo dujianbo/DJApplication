@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
 import com.personal.djb.catmovie.activity.LoginActivity;
 import com.personal.djb.catmovie.activity.MainActivity;
+import com.personal.djb.catmovie.activity.WebActivity;
 import com.personal.djb.catmovie.bean.cinema.CinemaBean;
 import com.personal.djb.catmovie.bean.movies.HotMovieHeadPagerBean;
 import com.personal.djb.catmovie.utils.CacheUtils;
@@ -305,6 +306,16 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(itemView);
 
             findView(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebActivity.class);
+                    int cinemaId = data.get(getLayoutPosition()-1).getId();
+                    intent.putExtra("url","http://m.maoyan.com/show/seats?cinemaId="+cinemaId);
+                    context.startActivity(intent);
+                }
+            });
         }
 
         /**

@@ -121,6 +121,7 @@
                 android:id="@+id/et_login_password"
                 android:textSize="16sp"
                 android:hint="密码"
+                android:password="true"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />

@@ -213,7 +213,7 @@ public class ShowShopActivity extends Activity {
                     list.clear();
                     list.addAll(list1);
                     showAdapter.notifyDataSetChanged();
-                    showPuPWindow();
+//                    showPuPWindow();
                     flag1 = true;
                     mTvBtn1.setSelected(flag1);
                     mTvBtn2.setSelected(false);
@@ -243,7 +243,7 @@ public class ShowShopActivity extends Activity {
                     list.clear();
                     list.addAll(list2);
                     showAdapter.notifyDataSetChanged();
-                    showPuPWindow();
+//                    showPuPWindow();
                     flag2 = true;
                     mTvBtn2.setSelected(flag2);
                     mTvBtn1.setSelected(false);
@@ -272,7 +272,7 @@ public class ShowShopActivity extends Activity {
                     list.clear();
                     list.addAll(list3);
                     showAdapter.notifyDataSetChanged();
-                    showPuPWindow();
+//                    showPuPWindow();
                     flag3 = true;
                     mTvBtn3.setSelected(flag3);
                     mTvBtn2.setSelected(false);
