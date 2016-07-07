@@ -28,6 +28,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -35,8 +36,8 @@ import okhttp3.Call;
 public class MostTypeActivity extends Activity {
 
     private Button mBtnForBack;
-    private RecyclerView mTypeRec;
-    private RecyclerView mPlaceRec;
+//    private RecyclerView mTypeRec;
+//    private RecyclerView mPlaceRec;
     private RecyclerView mFunnyRec;
     private boolean isRefreshing = false;
 
@@ -93,16 +94,16 @@ public class MostTypeActivity extends Activity {
     private void setView() {
 
         //  类型
-        typeAdapter = new MyCommonAdapter(types,tpyeposition,TYPE_TYPE);
-        typeManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
-        mTypeRec.setLayoutManager(typeManager);
-        mTypeRec.setAdapter(typeAdapter);
-
-        //  地区
-        placeAdapter = new MyCommonAdapter(places,placeposition,PLACE_TYPE);
-        placeManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
-        mPlaceRec.setLayoutManager(placeManager);
-        mPlaceRec.setAdapter(placeAdapter);
+//        typeAdapter = new MyCommonAdapter(types,tpyeposition,TYPE_TYPE);
+//        typeManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
+//        mTypeRec.setLayoutManager(typeManager);
+//        mTypeRec.setAdapter(typeAdapter);
+//
+//        //  地区
+//        placeAdapter = new MyCommonAdapter(places,placeposition,PLACE_TYPE);
+//        placeManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
+//        mPlaceRec.setLayoutManager(placeManager);
+//        mPlaceRec.setAdapter(placeAdapter);
 
         mNoNetPager.setVisibility(View.GONE);
         mLoadingPager.setVisibility(View.GONE);
@@ -151,6 +152,9 @@ public class MostTypeActivity extends Activity {
     private void processData(String json) {
         FunnyBean funnyBean = new Gson().fromJson(json, FunnyBean.class);
         funnyMovies = funnyBean.getData().get(0).getList();
+        List<FunnyBean.DataBean.ListBean> temp = new ArrayList<>();
+        temp.addAll(funnyMovies);
+        funnyMovies.addAll(temp);
 
         setFunnyView();
     }
@@ -192,8 +196,8 @@ public class MostTypeActivity extends Activity {
     private void findView() {
         mBtnForBack = (Button) findViewById(R.id.btn_mosttype_back);
 
-        mTypeRec = (RecyclerView) findViewById(R.id.type_rec);
-        mPlaceRec = (RecyclerView) findViewById(R.id.place_rec);
+//        mTypeRec = (RecyclerView) findViewById(R.id.type_rec);
+//        mPlaceRec = (RecyclerView) findViewById(R.id.place_rec);
         mFunnyRec = (RecyclerView) findViewById(R.id.recy_funny);
 
         mNoNetPager = (RelativeLayout) findViewById(R.id.netload_nonet);
@@ -217,15 +221,14 @@ public class MostTypeActivity extends Activity {
         private boolean first = true;
         private int myPosition;
         private String[] commonDatas;
-        private int prePosition;
 
         private int clickPosition = -1;
+        private boolean isFirstClick = false;
 
         public MyCommonAdapter(String[] datas,int myPosition,int type){
             this.commonDatas = datas;
             this.myPosition = myPosition;
             this.currType = type;
-            this.prePosition = myPosition;
         }
 
         @Override
@@ -249,7 +252,7 @@ public class MostTypeActivity extends Activity {
 
             private TextView mCommonItem;
 
-            public ViewHolder(View itemView) {
+            public ViewHolder(final View itemView) {
                 super(itemView);
 
                 mCommonItem = (TextView) itemView.findViewById(R.id.tv_type_most);
@@ -258,6 +261,9 @@ public class MostTypeActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         clickPosition = getLayoutPosition();
+                        if (!isFirstClick) {
+                            isFirstClick = true;
+                        }
 //                        switch (currType) {
 //                            case TYPE_TYPE :
 //                                typeAdapter.notifyDataSetChanged();
@@ -267,7 +273,7 @@ public class MostTypeActivity extends Activity {
 //                                break;
 //                        }
                         switch (currType) {
-                            case TYPE_TYPE :
+                            case TYPE_TYPE:
                                 Toast.makeText(me, types[clickPosition], Toast.LENGTH_SHORT).show();
                                 break;
                             case PLACE_TYPE:
@@ -290,10 +296,15 @@ public class MostTypeActivity extends Activity {
                     mCommonItem.setEnabled(true);
                 }
 
+                //  如果进行过一次点击才把first置为false
                 if (position == myPosition && first) {
+                    if(isFirstClick) {
+                        first = false;
+                        return;
+                    }
                     mCommonItem.setEnabled(true);
-                    first = false;
                 }
+
             }
         }
     }
@@ -305,6 +316,13 @@ public class MostTypeActivity extends Activity {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if(viewType == 0 || viewType ==1) {
+                MostHeadViewHolder holder = new MostHeadViewHolder(LayoutInflater.from(me).inflate(
+                        R.layout.search_most_type_item, parent, false
+                ));
+                return holder;
+            }
+
             SearchViewHolder holder = new SearchViewHolder(LayoutInflater.from(me).inflate(
                     R.layout.search_funny_item, parent, false
             ));
@@ -313,12 +331,32 @@ public class MostTypeActivity extends Activity {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ((SearchViewHolder)holder).setData(position);
+            if(position == 0) {
+                ((MostHeadViewHolder)holder).setData1();
+                return;
+            }
+
+            if(position == 1) {
+                ((MostHeadViewHolder)holder).setData2();
+                return;
+            }
+            ((SearchViewHolder)holder).setData(position - 2);
         }
 
         @Override
         public int getItemCount() {
-            return funnyMovies.size();
+            return funnyMovies.size() + 2;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if(position == 0) {
+                return 0;
+            } else if (position == 1) {
+                return 1;
+            } else {
+                return 2;
+            }
         }
 
         public class SearchViewHolder extends RecyclerView.ViewHolder{
@@ -329,6 +367,8 @@ public class MostTypeActivity extends Activity {
             private TextView tvItemHotmovieScore;
             private TextView tvTimeMovieStar;
             private TextView tvItemHotmovieDesc;
+
+
 
             private TextView tvEnm;
 
@@ -342,14 +382,13 @@ public class MostTypeActivity extends Activity {
                 tvItemHotmovieDesc = (TextView)itemView.findViewById(R.id.tv_item_hotmovie_desc);
                 tvEnm = (TextView) itemView.findViewById(R.id.tv_enm);
 
-
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(me,WebActivity.class);
+                        Intent intent = new Intent(me, WebActivity.class);
                         int funnyId = funnyMovies.get(getLayoutPosition()).getId();
                         String funnyUrl = "http://m.maoyan.com/movie/" + funnyId + "?_v_=yes";
-                        intent.putExtra("url",funnyUrl);
+                        intent.putExtra("url", funnyUrl);
                         startActivity(intent);
                     }
                 });
@@ -357,7 +396,6 @@ public class MostTypeActivity extends Activity {
 
             public void setData(int position) {
                 FunnyBean.DataBean.ListBean moviesBean = funnyMovies.get(position);
-
 
                 String imgUrl = moviesBean.getImg();
                 imgUrl = imgUrl.replace("w.h", "165.220");
@@ -380,6 +418,39 @@ public class MostTypeActivity extends Activity {
                 if (position < 3) {
                     tvNumber.setEnabled(true);
                 }
+            }
+        }
+
+        public class MostHeadViewHolder extends RecyclerView.ViewHolder{
+
+            private RecyclerView recyclerView;
+            private TextView my_tv_test;
+
+            public MostHeadViewHolder(View itemView) {
+                super(itemView);
+
+                recyclerView = (RecyclerView) itemView.findViewById(R.id.type_rec);
+                my_tv_test = (TextView) itemView.findViewById(R.id.my_tv_test);
+            }
+
+            public void setData1() {
+                //  类型
+                typeAdapter = new MyCommonAdapter(types,tpyeposition,TYPE_TYPE);
+                typeManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
+                recyclerView.setLayoutManager(typeManager);
+                recyclerView.setAdapter(typeAdapter);
+
+
+            }
+
+            public void setData2() {
+                my_tv_test.setVisibility(View.VISIBLE);
+                //  地区
+                placeAdapter = new MyCommonAdapter(places,placeposition,PLACE_TYPE);
+                placeManager = new LinearLayoutManager(me,LinearLayoutManager.HORIZONTAL,false);
+                recyclerView.setLayoutManager(placeManager);
+                recyclerView.setAdapter(placeAdapter);
+
             }
         }
     }

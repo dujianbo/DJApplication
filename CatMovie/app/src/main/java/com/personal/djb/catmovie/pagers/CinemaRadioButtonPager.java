@@ -148,6 +148,7 @@ public class CinemaRadioButtonPager extends BasePager {
     };
     private TextView mSearchNoFind;
     private CinemaAdapter timeAdapter;
+    private boolean isPlace = false;
 
     private List<CinemaBean.BaseBean> toListFromName(List<String> cinemaNames) {
         timeDatas.clear();
@@ -276,6 +277,11 @@ public class CinemaRadioButtonPager extends BasePager {
         String detail = placeBean.getData().getDetail();
 
         mCurPlace.setText(detail);
+
+        if(isPlace) {
+            isPlace = false;
+            return;
+        }
 
         myLat = placeBean.getData().getLat();
         myLng = placeBean.getData().getLng();
@@ -565,6 +571,7 @@ public class CinemaRadioButtonPager extends BasePager {
             @Override
             public void onClick(View v) {
                 Log.e("TAG1111", "选择地址条被点击");
+                isPlace = true;
                 getMyPlaceFromNet();
             }
         });
