@@ -67,4 +67,11 @@ dependencies {
     compile name: 'SMSSDKGUI-2.1.0', ext: 'aar'
     compile files('libs/MobCommons-2016.0624.1326.jar')
     compile project(':zXingPortrait')
+    compile ('com.github.chrisbanes:PhotoView:1.2.6'){
+        exclude module:'support-v4'
+    }
+//    compile ('com.android.support:appcompat-v7:23.4.0'){
+//        exclude module:'support-v4'
+//    }
+
 }

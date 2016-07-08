@@ -36,6 +36,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -251,6 +252,9 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
         ivYkSecondicon3.setOnClickListener(this);
         ivYkSecondicon4.setOnClickListener(this);
         tvAllJ.setOnClickListener(this);
+
+        topBgIv.setOnClickListener(this);
+        ivYkTopIcon.setOnClickListener(this);
 
         allType.setOnClickListener(this);
         mRefreshLayout.setMaterialRefreshListener(new MyMaterialRefreshListener());
@@ -553,6 +557,11 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
             finish();
         } else if (v == ivYkTopIcon) {
             Toast.makeText(CelluloideActivity.this, "小图标被点击", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, WebActivity.class);
+            int idHot = topDatas.get(0).getObjectId();
+            String urlHot = "http://m.maoyan.com/movie/" + idHot + "?_v_=yes";
+            intent.putExtra("url",urlHot);
+            startActivity(intent);
         } else if (v == rlKoubei || v == tvYkNumber1 || v == ivYkSecondicon1) {
             Intent intent = new Intent(this, BillboardActivity.class);
             Bundle bundle = new Bundle();
@@ -597,6 +606,12 @@ public class CelluloideActivity extends Activity implements View.OnClickListener
 //            startActivity(new Intent(this,MostTypeActivity.class));
         } else if (v == allType){
             startActivity(new Intent(this,MostTypeActivity.class));
+        } else if (v == topBgIv) {
+            Intent intent = new Intent(this, PhotoViewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("imgurl", (Serializable) topDatas);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 
