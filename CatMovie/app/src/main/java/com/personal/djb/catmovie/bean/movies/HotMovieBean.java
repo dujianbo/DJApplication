@@ -2,6 +2,7 @@ package com.personal.djb.catmovie.bean.movies;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -111,7 +112,7 @@ public class HotMovieBean {
             this.movies = movies;
         }
 
-        public static class MoviesBean {
+        public static class MoviesBean implements Serializable{
             private boolean late;
             private int cnms;
             private int sn;

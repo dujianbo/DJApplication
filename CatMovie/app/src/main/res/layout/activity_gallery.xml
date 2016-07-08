@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.personal.djb.catmovie.activity.GalleryActivity">
+
+    <TextView
+        android:id="@+id/tv_gallery_title"
+        android:textColor="#ff9900"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="标题"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <com.personal.djb.catmovie.activity.gallery.CustomGallery
+        android:id="@+id/customgallery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </com.personal.djb.catmovie.activity.gallery.CustomGallery>
+</LinearLayout>

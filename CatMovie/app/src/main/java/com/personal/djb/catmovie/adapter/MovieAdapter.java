@@ -2,6 +2,7 @@ package com.personal.djb.catmovie.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -18,11 +19,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.personal.djb.catmovie.R;
+import com.personal.djb.catmovie.activity.GalleryActivity;
 import com.personal.djb.catmovie.activity.WebActivity;
 import com.personal.djb.catmovie.bean.movies.HotMovieBean;
 import com.personal.djb.catmovie.bean.movies.HotMovieHeadPagerBean;
@@ -32,6 +35,7 @@ import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -406,7 +410,16 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 //  链接到播放器
                 @Override
                 public void onClick(View v) {
-
+                    switch (currType) {
+                        case HOT_MOVIE:
+                            Toast.makeText(context, "图标被点击..", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, GalleryActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("imgs", (Serializable) hotMovieDatas);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                            break;
+                    }
                 }
             });
         }
@@ -464,12 +477,13 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 //                            Toast.makeText(context, "很可惜，没有数据..", Toast.LENGTH_SHORT).show();
                             int idWait = waitMovieDatas.get(getLayoutPosition() - 1).getId();
                             String urlWait = "http://m.maoyan.com/movie/" + idWait + "?_v_=yes";
-                            intent.putExtra("url",urlWait);
+                            intent.putExtra("url", urlWait);
                             context.startActivity(intent);
                             break;
                     }
                 }
             });
+
         }
 
         /**

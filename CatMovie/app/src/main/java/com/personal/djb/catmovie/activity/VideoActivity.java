@@ -118,8 +118,6 @@ public class VideoActivity extends Activity {
 
 
 
-
-
     /** 当前视频路径 */
     //    private String path = Environment.getExternalStorageDirectory() + "/hd.mp4";
     private String path;
@@ -164,13 +162,13 @@ public class VideoActivity extends Activity {
             mVideoView.requestFocus();
 
             mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mediaPlayer) {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
 //                            mediaPlayer.setPlaybackSpeed(1.0f);
-                            mediaPlayer1 = mediaPlayer;
-                            mediaPlayer.start();
-                        }
-                    });
+                    mediaPlayer1 = mediaPlayer;
+                    mediaPlayer.start();
+                }
+            });
         }
     }
 
@@ -179,11 +177,12 @@ public class VideoActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mediaPlayer1 != null) {
-            mediaPlayer1.reset();
-            mediaPlayer1.release();
-            mediaPlayer1.stop();
-        }
+//        if (mediaPlayer1 != null) {
+//            mediaPlayer1.reset();
+//            mediaPlayer1.release();
+//            mediaPlayer1.stop();
+//        }
+        mVideoView.stopPlayback();
     }
 
     private io.vov.vitamio.widget.VideoView mVideoView;
